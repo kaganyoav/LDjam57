@@ -10,7 +10,8 @@ public class Rope2DGenerator : MonoBehaviour
     public Transform endPoint;
     public Rigidbody2D segmentPrefab;
     public float spawnDelay = 0.05f; // time between segment spawns
-
+    public float segmentMadePercentage;
+    
     [HideInInspector] public Transform[] segments;
     
     
@@ -54,6 +55,7 @@ public class Rope2DGenerator : MonoBehaviour
             }
 
             prevRb = newSegment;
+            segmentMadePercentage = (float)(i + 1) / segmentCount;
             yield return new WaitForSeconds(spawnDelay);
         }
         //
