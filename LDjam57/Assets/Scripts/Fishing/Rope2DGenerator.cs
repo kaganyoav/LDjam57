@@ -12,7 +12,12 @@ public class Rope2DGenerator : MonoBehaviour
     public float spawnDelay = 0.05f; // time between segment spawns
 
     [HideInInspector] public Transform[] segments;
-
+    
+    
+    [Header("Magnet Settings")]
+    [SerializeField] private GameObject magnetPrefab;
+    private GameObject magnetInstance;
+    
     private void Start()
     {
         StartCoroutine(GenerateRope());
@@ -26,6 +31,11 @@ public class Rope2DGenerator : MonoBehaviour
 
         for (int i = 0; i < segmentCount; i++)
         {
+            if (i == 1 && magnetPrefab != null)
+            {
+                magnetInstance = Instantiate(magnetPrefab, startPoint.position, Quaternion.identity);
+            }
+            
             Vector2 pos = Vector2.Lerp(startPoint.position, endPoint.position, (float)i / (segmentCount - 1));
             Rigidbody2D newSegment = Instantiate(segmentPrefab, pos, Quaternion.identity, transform);
             // newSegment.gravityScale += 1+ (i/segmentCount); // Increase gravity scale for each segment
@@ -50,15 +60,31 @@ public class Rope2DGenerator : MonoBehaviour
         // // Optionally connect last segment to endPoint
         // HingeJoint2D endJoint = segments[segmentCount - 1].gameObject.AddComponent<HingeJoint2D>();
         // endJoint.connectedBody = endPoint.GetComponent<Rigidbody2D>();
-        
-        HingeJoint2D lastJoint = endPoint.gameObject.GetComponent<HingeJoint2D>();
-        lastJoint.connectedBody = segments[segmentCount - 1].GetComponent<Rigidbody2D>();
+        //
+        // HingeJoint2D lastJoint = endPoint.gameObject.GetComponent<HingeJoint2D>();
+        // lastJoint.connectedBody = segments[segmentCount - 1].GetComponent<Rigidbody2D>();
     }
     
     Vector2 GetSegmentPosition(int index)
     {
         float t = (float)index / (segmentCount - 1);
         return Vector2.Lerp(startPoint.position, endPoint.position, t);
+    }
+    
+    private void Update()
+    {
+        // While rope is building, update magnet's position
+        if (magnetInstance != null && segments != null)
+        {
+            for (int i = segmentCount - 1; i >= 0; i--)
+            {
+                if (segments[i] != null)
+                {
+                    magnetInstance.transform.position = segments[i].position;
+                    break;
+                }
+            }
+        }
     }
 
     private void OnDrawGizmos()
