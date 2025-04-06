@@ -5,22 +5,21 @@ using UnityEngine.UI;
 
 public class FishingManager : MonoBehaviour
 {
+    [Header("Bar")]
+    [SerializeField] private Transform barTransform;
     [SerializeField] private Transform topPivot;
     [SerializeField] private Transform bottomPivot;
-    
     [SerializeField] private Transform artifactTransform;
-
+    
     
     [Header("Artifact")]
     private float artifactPosition;
     private float artifactDestination;
-
     private float artifactTimer;
     [SerializeField] private float timerMultiplier = 3f;
-
     private float artifactSpeed;
     [SerializeField] private float smoothMotion = 1f;
-
+    [SerializeField] private SpriteRenderer artifactBoxSpriteRenderer;
     [SerializeField] private SpriteRenderer artifactSpriteRenderer;
     
     [Header("Magnet")]
@@ -39,12 +38,27 @@ public class FishingManager : MonoBehaviour
     private bool pause = false;
 
     [SerializeField] private float failTimer = 10f;
-    
-    [SerializeField] private float difficultyMultiplier = 1f;
-    
-    private void Start()
+
+    private void Awake()
     {
-        ResizeArtifact(difficultyMultiplier);
+        barTransform.gameObject.SetActive(false);
+    }
+
+    public void StartMiniGame(ArtifactData artifactData, float catchX)
+    {
+        //set artifact features according to player stats
+        barTransform.gameObject.SetActive(true);
+        barTransform.position = new Vector3(catchX - 0.5f, barTransform.position.y, barTransform.position.z);
+        // artifactSpriteRenderer.sprite = artifactData.artifactSprite;
+        artifactPosition = 0;
+        artifactDestination = 0;
+        artifactTimer = UnityEngine.Random.value * timerMultiplier;
+        magnetPosition = 0.5f;
+        magnetProgress = 0;
+        failTimer = 10f;
+        float artifactSize = artifactData.artifactType.fishingBoxSize;
+        ResizeArtifact();
+        pause = false;
     }
 
     private void Update()

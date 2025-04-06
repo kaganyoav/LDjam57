@@ -19,7 +19,10 @@ public class Rope2DGenerator : MonoBehaviour
     [SerializeField] private GameObject magnetPrefab;
     private GameObject magnetInstance;
     
-    private void Start()
+    [Header("Line")]
+    [SerializeField] RopeLine ropeLine;
+
+    public void ThrowRope()
     {
         StartCoroutine(GenerateRope());
     }
@@ -35,6 +38,7 @@ public class Rope2DGenerator : MonoBehaviour
             if (i == 1 && magnetPrefab != null)
             {
                 magnetInstance = Instantiate(magnetPrefab, startPoint.position, Quaternion.identity);
+                ropeLine.SetRopeActive(true);
             }
             
             Vector2 pos = Vector2.Lerp(startPoint.position, endPoint.position, (float)i / (segmentCount - 1));

@@ -20,16 +20,16 @@ public class Artifact
     
     public string GetArtifactName()
     {
-        return artifactData.artifactName;
+        return artifactData.artifactType.artifactName;
     }
     public int GetRealPrice()
     {
-        return artifactData.artifactRealPrice;
+        return artifactData.artifactType.artifactRealPrice;
     }
 
     public int GetSouvenirPrice()
     {
-        return artifactData.artifactSouvenirPrice;
+        return artifactData.artifactType.artifactSouvenirPrice;
     }
     
     public Sprite GetArtifactSprite()
