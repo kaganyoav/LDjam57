@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1545b94b90057cd4e829c48814a2a15d
+guid: 27b597cdc6d556644b78ebee0fda8ad7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5832756809558215591
-    second: trophy real_0
+      213: 1568809582310815999
+    second: pendant lines_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trophy real_0
+      name: pendant lines_0
       rect:
         serializedVersion: 2
-        x: 1252
-        y: 261
-        width: 1391
-        height: 1678
+        x: 1342
+        y: 497
+        width: 1068
+        height: 1033
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 954ba01c592ed0fa0800000000000000
-      internalID: -5832756809558215591
+      spriteID: ff87dd1d00885c510800000000000000
+      internalID: 1568809582310815999
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      trophy real_0: -5832756809558215591
+      pendant lines_0: 1568809582310815999
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
