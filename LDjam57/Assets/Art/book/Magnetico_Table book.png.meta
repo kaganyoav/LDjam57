@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: a84b7604b18c40348912b3ec18431995
+guid: 5c60d338bdabd504d8fcadcb011ba280
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3301363303864267761
-    second: coin_5_0
+      213: -1894306034496488880
+    second: Magnetico_Table book_0
+  - first:
+      213: -4253189758698749302
+    second: Magnetico_Table book_1
+  - first:
+      213: -2714979368587920908
+    second: Magnetico_Table book_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +52,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 108
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: coin_5_0
+      name: Magnetico_Table book_0
       rect:
         serializedVersion: 2
-        x: 1487
-        y: 612
-        width: 898
-        height: 892
+        x: 704
+        y: 208
+        width: 37
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0c09a601933f22d0800000000000000
-      internalID: -3301363303864267761
+      spriteID: 05a35f5b2b216b5e0800000000000000
+      internalID: -1894306034496488880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magnetico_Table book_1
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 181
+        width: 2428
+        height: 1798
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a828e66e272a9f4c0800000000000000
+      internalID: -4253189758698749302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magnetico_Table book_2
+      rect:
+        serializedVersion: 2
+        x: 3099
+        y: 208
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f97dca16a4725ad0800000000000000
+      internalID: -2714979368587920908
       vertices: []
       indices: 
       edges: []
@@ -125,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      coin_5_0: -3301363303864267761
+      Magnetico_Table book_0: -1894306034496488880
+      Magnetico_Table book_1: -4253189758698749302
+      Magnetico_Table book_2: -2714979368587920908
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
