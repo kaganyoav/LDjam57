@@ -5,44 +5,56 @@ using DG.Tweening;
 
 public class ThrowingManager : MonoBehaviour
 {
-    [SerializeField] ArtifactOdds artifactOdds;
-    
+    // ————————————————————————
+    // Inspector References
+    // ————————————————————————
+
+    [Header("Dependencies")]
+    [SerializeField] private ArtifactOdds artifactOdds;
+    [SerializeField] private FishingManager fishingManager;
+
+    [Header("Power Bar")]
     [SerializeField] private GameObject powerBar;
     [SerializeField] private Image powerBarFill;
     [SerializeField] private float fillSpeed = 1.5f;
-    [SerializeField] private FishingManager fishingManager;
     [SerializeField] private float resetTime = 0.5f;
-
-    private float currentFill = 0f;
-    private bool isFilling = false;
-    private bool goingUp = true;
-
-    
-    private bool canReceiveInput = false;
-    
     [SerializeField] private Gradient fillGradient;
     [SerializeField] private AnimationCurve easeInCurve;
-    
+
+    [Header("Throw Settings")]
     [SerializeField] private float minThrowX = 4f;
     [SerializeField] private float maxThrowX = -7.5f;
-    
+
     [Header("Rope")]
-    [SerializeField] private Transform ropeEnd;
-    [SerializeField] private Rope2DGenerator rope2DGenerator;
-    
+    [SerializeField] private LineRenderer ropeLine;
+    [SerializeField] private int ropeSegmentCount = 20;
+    [SerializeField] private float ropeSlack = 1.5f;
+
     [Header("Magnet")]
-    private Vector3 magnetStartPos;
     [SerializeField] private Transform magnetTransform;
     [SerializeField] private Rigidbody2D magnetRb;
     [SerializeField] private float seaBottomY = -2.5f;
-    
+
+    [Header("Artifact Display")]
+    [SerializeField] private ArtifactData currentArtifact;
+    [SerializeField] private SpriteRenderer artifactSpriteRenderer;
+
+    // ————————————————————————
+    // Private State
+    // ————————————————————————
+
+    private Vector3 magnetStartPos;
+    private float currentFill = 0f;
+    private bool isFilling = false;
+    private bool goingUp = true;
+    private bool canReceiveInput = false;
     private bool isMinigameActive = false;
-    
-    [Header("Line")]
-    [SerializeField] private LineRenderer ropeLine;
-    [SerializeField] private int ropeSegmentCount = 20;
-    [SerializeField] private float ropeSlack = 1.5f; // how much dip in the middle
-    
+
+
+    // ————————————————————————
+    // Unity Events
+    // ————————————————————————
+
     private void Awake()
     {
         powerBar.SetActive(false);
@@ -50,22 +62,16 @@ public class ThrowingManager : MonoBehaviour
         magnetStartPos = magnetTransform.position;
         ropeLine.positionCount = ropeSegmentCount;
     }
-    
+
     private void Start()
     {
-        StartCoroutine(EnableInputAfterDelay(0.1f)); // Delay for safety
+        StartCoroutine(EnableInputAfterDelay(0.1f));
     }
 
-    IEnumerator EnableInputAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        canReceiveInput = true;
-    }
-    
-    void Update()
+    private void Update()
     {
         if (!canReceiveInput || isMinigameActive) return;
-        
+
         if (Input.GetMouseButtonDown(0))
         {
             powerBar.SetActive(true);
@@ -80,110 +86,118 @@ public class ThrowingManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && isFilling)
         {
             StopFilling();
-            StartCoroutine(WaitAndDissapear());
+            StartCoroutine(WaitForPowerBarToHide());
         }
     }
-    
-    void LateUpdate()
+
+    private void LateUpdate()
     {
         UpdateRope();
     }
 
-    IEnumerator WaitAndDissapear()
+
+    // ————————————————————————
+    // Power Bar Logic
+    // ————————————————————————
+
+    private IEnumerator EnableInputAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(resetTime);
-        powerBar.SetActive(false);
+        yield return new WaitForSeconds(delay);
+        canReceiveInput = true;
     }
 
-    void StartFilling()
+    private void StartFilling()
     {
         isFilling = true;
         goingUp = true;
         currentFill = 0f;
     }
 
-    void UpdateFill()
+    private void UpdateFill()
     {
         float delta = fillSpeed * Time.deltaTime * (goingUp ? 1 : -1);
         currentFill += delta * easeInCurve.Evaluate(currentFill);
 
-        if (currentFill >= 1f)
-        {
-            currentFill = 1f;
-            goingUp = false;
-        }
-        else if (currentFill <= 0f)
-        {
-            currentFill = 0f;
-            goingUp = true;
-        }
+        if (currentFill >= 1f) { currentFill = 1f; goingUp = false; }
+        else if (currentFill <= 0f) { currentFill = 0f; goingUp = true; }
 
         powerBarFill.fillAmount = currentFill;
         powerBarFill.color = fillGradient.Evaluate(currentFill);
     }
 
-
-    void StopFilling()
+    private void StopFilling()
     {
         isFilling = false;
-
-        float throwPower = currentFill; // 0 to 1
-        // Debug.Log($"Throw Power: {throwPower}");
-        
+        float throwPower = currentFill;
         StartFishingMinigame(throwPower);
     }
 
-    // private void StartFishingMinigame(float throwPower)
-    // {
-    //     isMinigameActive = true;
-    //     float throwX = Mathf.Lerp(minThrowX, maxThrowX, throwPower);
-    //     ArtifactData artifactData = artifactOdds.GetArtifactData(throwPower);
-    //     // Debug.Log($"Throw X: {throwX}");
-    //     // Debug.Log($"Artifact Data: {artifactData.artifactType.artifactName}");
-    //     DOVirtual.DelayedCall(0.5f, () =>
-    //     {
-    //         fishingManager.StartMiniGame(artifactData, throwX);
-    //     });
-    // }
-    
+    private IEnumerator WaitForPowerBarToHide()
+    {
+        yield return new WaitForSeconds(resetTime);
+        powerBar.SetActive(false);
+    }
+
+
+    // ————————————————————————
+    // Throw & Minigame
+    // ————————————————————————
+
     private void StartFishingMinigame(float throwPower)
     {
         isMinigameActive = true;
-        
-        // Activate and reset
-        magnetTransform.gameObject.SetActive(true);
-        magnetRb.linearVelocity = Vector2.zero;
-        magnetRb.angularVelocity = 0;
 
-        // Position the magnet at rope start
+        artifactSpriteRenderer.sprite = null;
+        magnetTransform.gameObject.SetActive(true);
+
+        magnetRb.velocity = Vector2.zero;
+        magnetRb.angularVelocity = 0;
         magnetTransform.position = magnetStartPos;
+
         ropeLine.enabled = true;
 
-        // Apply throw force
         Vector2 throwDirection = new Vector2(Mathf.Lerp(0, maxThrowX, throwPower), 1f).normalized;
-        float forcePower = Mathf.Lerp(3f, 9f, throwPower); // tune as needed
+        float forcePower = Mathf.Lerp(3f, 9f, throwPower);
 
         magnetRb.AddForce(throwDirection * forcePower, ForceMode2D.Impulse);
 
-        // Optionally: start the minigame after a delay or on landing
         StartCoroutine(WaitForLanding(() =>
         {
             ArtifactData artifact = artifactOdds.GetArtifactData(throwPower);
-            // fishingManager.StartMiniGame(artifact, magnetTransform.position.x);
+            currentArtifact = artifact;
+            fishingManager.StartMiniGame(artifact, magnetTransform.position.x);
         }));
     }
 
-    IEnumerator WaitForLanding(System.Action onLanded)
+    private IEnumerator WaitForLanding(System.Action onLanded)
     {
         yield return new WaitUntil(() => magnetRb.linearVelocity.magnitude < 0.1f);
-        yield return new WaitForSeconds(0.3f); // small buffer
+        yield return new WaitForSeconds(0.3f);
         onLanded?.Invoke();
     }
-    
-    [ContextMenu("Pull Magnet Back")]
+
+    public void MinigameOver(bool withArtifact = false)
+    {
+        artifactSpriteRenderer.sprite = withArtifact ? currentArtifact.artifactSprite : null;
+
+        PullMagnetBack(() =>
+        {
+            EnableThrowing();
+        });
+    }
+
+    public void EnableThrowing()
+    {
+        isMinigameActive = false;
+    }
+
+
+    // ————————————————————————
+    // Rope & Pullback
+    // ————————————————————————
+
     public void PullMagnetBack(System.Action onComplete = null)
     {
-        // Disable physics so it doesn't fight the tween
         magnetRb.velocity = Vector2.zero;
         magnetRb.angularVelocity = 0f;
         magnetRb.isKinematic = true;
@@ -191,19 +205,16 @@ public class ThrowingManager : MonoBehaviour
         magnetTransform
             .DOMove(magnetStartPos, 1.5f)
             .SetEase(Ease.InOutQuad)
-            .OnUpdate(() =>
-            {
-                UpdateRope(); // Keep the rope updating manually
-            })
+            .OnUpdate(UpdateRope)
             .OnComplete(() =>
             {
-                magnetRb.isKinematic = false; // Ready for next throw
+                magnetRb.isKinematic = false;
                 ropeLine.enabled = false;
-                magnetTransform.gameObject.SetActive(false); // Hide the magnet
+                magnetTransform.gameObject.SetActive(false);
                 onComplete?.Invoke();
             });
     }
-    
+
     private void UpdateRope()
     {
         if (!ropeLine.enabled || !magnetTransform.gameObject.activeSelf) return;
@@ -219,19 +230,5 @@ public class ThrowingManager : MonoBehaviour
             point.y -= sag;
             ropeLine.SetPosition(i, point);
         }
-    }
-
-    [ContextMenu("Reset")]
-    public void PullBack()
-    {
-        PullMagnetBack(() =>
-        {
-            EnableThrowing(); // Ready for another throw
-        });
-    }
-    
-    public void EnableThrowing()
-    {
-        isMinigameActive = false;
     }
 }

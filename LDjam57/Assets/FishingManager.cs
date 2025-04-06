@@ -38,6 +38,8 @@ public class FishingManager : MonoBehaviour
     private bool pause = false;
 
     [SerializeField] private float failTimer = 10f;
+    
+    [SerializeField] private ThrowingManager throwingManager;
 
     private void Awake()
     {
@@ -85,30 +87,26 @@ public class FishingManager : MonoBehaviour
             failTimer -= Time.deltaTime;
             if (failTimer <= 0)
             {
-                Lose();
+                EndMiniGame(false);
             }
         }
 
         if (magnetProgress > 1)
         {
-            Win();
+            EndMiniGame(true);
         }
 
         magnetProgress = Mathf.Clamp(magnetProgress, 0, 1);
         
         progressBar.value = magnetProgress;
     }
-
-    private void Win()
+    
+    private void EndMiniGame(bool win)
     {
-        progressBar.value = 1;
         pause = true;
-    }
-
-    private void Lose()
-    {
-        progressBar.value = 0;
-        pause = true;
+        progressBar.value = win ? 1 : 0;
+        barTransform.gameObject.SetActive(false);
+        throwingManager.MinigameOver(win);
     }
     
     private void ResizeArtifact(float y = 1f)
