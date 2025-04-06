@@ -11,11 +11,49 @@ public class ArtifactInventoryLoader : MonoBehaviour
     private List<Artifact> artifacts = new();
     private List<ArtifactSlot> slots = new();
 
-    void Start()
+    // void Start()
+    // {
+    //     int i = 0;
+    //     foreach (ArtifactData data in artifactDataList)
+    //     {
+    //         if(data == null)
+    //         {
+    //             Debug.LogWarning($"ArtifactData at index {i} is null. Skipping.");
+    //             continue;
+    //         }
+    //         Artifact artifact = new Artifact(data);
+    //         artifacts.Add(artifact);
+    //
+    //         ArtifactSlot slot = Instantiate(slotPrefab, slotContainers[i]);
+    //         slot.Initialize(artifact, () => uiManager.SelectArtifactFromSlot(slot));
+    //         slots.Add(slot);
+    //         i++;
+    //     }
+    //
+    //     uiManager.SetSlots(slots);
+    // }
+    public void Start()
     {
-        int i = 0;
-        foreach (ArtifactData data in artifactDataList)
+        LoadArtifacts(GameManager.Instance.playerInventory.artifacts);
+    }
+    public void LoadArtifacts(List<ArtifactData> newArtifactDataList)
+    {
+        foreach (ArtifactSlot slot in slots)
         {
+            Destroy(slot.gameObject);
+        }
+        
+        artifacts.Clear();
+        slots.Clear();
+
+        int i = 0;
+        foreach (ArtifactData data in newArtifactDataList)
+        {
+            if(data == null)
+            {
+                Debug.LogWarning($"ArtifactData at index {i} is null. Skipping.");
+                continue;
+            }
             Artifact artifact = new Artifact(data);
             artifacts.Add(artifact);
 

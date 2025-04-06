@@ -13,39 +13,31 @@ MonoBehaviour:
   m_Name: ArtifactOdds
   m_EditorClassIdentifier: 
   closeRangeOdds:
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
+  - 0.6
+  - 0.4
   closeRangeTypes:
   - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
+  - {fileID: 11400000, guid: da43a75bda2e06d4c9c0c3a49d4ae313, type: 2}
   middleRangeOdds:
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
+  - 0.3
+  - 0.3
+  - 0.3
   - 0.2
   middleRangeTypes:
   - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
+  - {fileID: 11400000, guid: da43a75bda2e06d4c9c0c3a49d4ae313, type: 2}
+  - {fileID: 11400000, guid: 739755601fdc3f245be35f02ab466976, type: 2}
+  - {fileID: 11400000, guid: 0eb06ecbe4c02a7449ba7fc0bafacf67, type: 2}
   farRangeOdds:
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
+  - 0.1
+  - 0.25
+  - 0.3
+  - 0.25
+  - 0.1
   farRangeTypes:
   - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
-  - {fileID: 11400000, guid: ca4adc1451c38d34e9f3169a3fc4886d, type: 2}
+  - {fileID: 11400000, guid: da43a75bda2e06d4c9c0c3a49d4ae313, type: 2}
+  - {fileID: 11400000, guid: 739755601fdc3f245be35f02ab466976, type: 2}
+  - {fileID: 11400000, guid: 0eb06ecbe4c02a7449ba7fc0bafacf67, type: 2}
+  - {fileID: 11400000, guid: 88b8ea050c5139c41a8c081230f6909c, type: 2}
   defaultArtifact: {fileID: 11400000, guid: 06a7bbb133fc98b4da09cba3e05675fd, type: 2}

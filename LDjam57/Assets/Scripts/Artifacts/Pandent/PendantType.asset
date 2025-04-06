@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc97a9c7f925a342bec49ffe680a684, type: 3}
+  m_Name: PendantType
+  m_EditorClassIdentifier: 
+  artifacts:
+  - {fileID: 11400000, guid: 141ba0e7e6e071b4ab2fed9e1aaa71f6, type: 2}
+  - {fileID: 11400000, guid: 77978d366ca32c64e928330149fdaa4c, type: 2}
+  - {fileID: 11400000, guid: 7474552e50bc630449bf32daa0c0dd5b, type: 2}
+  - {fileID: 11400000, guid: f4906811423a328439a2e37d76414215, type: 2}
+  - {fileID: 11400000, guid: 89cb685c33f3fc34ca39435c8e0fe313, type: 2}
+  - {fileID: 11400000, guid: 79d401b7c5b62d942953911065878098, type: 2}
+  odds:
+  - 0.3
+  - 0.2
+  - 0.2
+  - 0.1
+  - 0.1
+  - 0.1
+  artifactName: Pendant
+  artifactRealPrice: 250
+  artifactSouvenirPrice: 20
+  fishingBoxSize: 1
+  iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  drawnSprite: {fileID: 21300000, guid: 27b597cdc6d556644b78ebee0fda8ad7, type: 3}
+  silhouetteSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
