@@ -4,10 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ArtifactData", menuName = "Scriptable Objects/ArtifactData")]
 public class ArtifactData : ScriptableObject
 {
-    public string artifactName;
-    public int artifactRealPrice;
-    public int artifactSouvenirPrice;
-    public float artifactRarity;
+    public ArtifactType artifactType;
     public bool isReal;
     public Sprite artifactSprite;
 }

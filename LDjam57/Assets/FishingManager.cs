@@ -5,22 +5,21 @@ using UnityEngine.UI;
 
 public class FishingManager : MonoBehaviour
 {
+    [Header("Bar")]
+    [SerializeField] private Transform barTransform;
     [SerializeField] private Transform topPivot;
     [SerializeField] private Transform bottomPivot;
-    
     [SerializeField] private Transform artifactTransform;
-
+    
     
     [Header("Artifact")]
     private float artifactPosition;
     private float artifactDestination;
-
     private float artifactTimer;
     [SerializeField] private float timerMultiplier = 3f;
-
     private float artifactSpeed;
     [SerializeField] private float smoothMotion = 1f;
-
+    [SerializeField] private SpriteRenderer artifactBoxSpriteRenderer;
     [SerializeField] private SpriteRenderer artifactSpriteRenderer;
     
     [Header("Magnet")]
@@ -40,11 +39,28 @@ public class FishingManager : MonoBehaviour
 
     [SerializeField] private float failTimer = 10f;
     
-    [SerializeField] private float difficultyMultiplier = 1f;
-    
-    private void Start()
+    [SerializeField] private ThrowingManager throwingManager;
+
+    private void Awake()
     {
-        ResizeArtifact(difficultyMultiplier);
+        barTransform.gameObject.SetActive(false);
+    }
+
+    public void StartMiniGame(ArtifactData artifactData, float catchX)
+    {
+        //set artifact features according to player stats
+        barTransform.gameObject.SetActive(true);
+        barTransform.position = new Vector3(catchX - 0.5f, barTransform.position.y, barTransform.position.z);
+        // artifactSpriteRenderer.sprite = artifactData.artifactSprite;
+        artifactPosition = 0;
+        artifactDestination = 0;
+        artifactTimer = UnityEngine.Random.value * timerMultiplier;
+        magnetPosition = 0.5f;
+        magnetProgress = 0;
+        failTimer = 10f;
+        float artifactSize = artifactData.artifactType.fishingBoxSize;
+        ResizeArtifact();
+        pause = false;
     }
 
     private void Update()
@@ -71,30 +87,26 @@ public class FishingManager : MonoBehaviour
             failTimer -= Time.deltaTime;
             if (failTimer <= 0)
             {
-                Lose();
+                EndMiniGame(false);
             }
         }
 
         if (magnetProgress > 1)
         {
-            Win();
+            EndMiniGame(true);
         }
 
         magnetProgress = Mathf.Clamp(magnetProgress, 0, 1);
         
         progressBar.value = magnetProgress;
     }
-
-    private void Win()
+    
+    private void EndMiniGame(bool win)
     {
-        progressBar.value = 1;
         pause = true;
-    }
-
-    private void Lose()
-    {
-        progressBar.value = 0;
-        pause = true;
+        progressBar.value = win ? 1 : 0;
+        barTransform.gameObject.SetActive(false);
+        throwingManager.MinigameOver(win);
     }
     
     private void ResizeArtifact(float y = 1f)

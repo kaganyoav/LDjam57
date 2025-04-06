@@ -8,7 +8,7 @@ public class RopeLine : MonoBehaviour
     [SerializeField] private float throwSpeed = 0.05f; // Speed of throw
 
     private int currentVisibleSegments = 0;
-    private bool isThrown = false;
+    private bool isActivated = false;
 
     private void Awake()
     {
@@ -38,16 +38,26 @@ public class RopeLine : MonoBehaviour
 
     private void Update()
     {
-        if (rope2DGenerator.segments != null && !isThrown)
-        {
-            isThrown = true;
-            StartCoroutine(ThrowRope());
-        }
-        
         // Keep updating positions in case rope is moving dynamically
         for (int i = 0; i < currentVisibleSegments; i++)
         {
             lineRenderer.SetPosition(i, rope2DGenerator.segments[i].position);
+        }
+    }
+    
+    public void SetRopeActive(bool isActive)
+    {
+        isActivated = isActive;
+        if (isActive)
+        {
+            lineRenderer.enabled = true;
+            StartCoroutine(ThrowRope());
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+            StopAllCoroutines();
+            currentVisibleSegments = 0;
         }
     }
 }

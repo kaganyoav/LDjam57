@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0.1
+  m_GravityScale: 0.2
   m_Material: {fileID: 6200000, guid: 09e2c8615703a6041932eb11c196c722, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -150,7 +150,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5387708900494577468}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
