@@ -8,8 +8,15 @@ using DG.Tweening;
 
 public class ArtifactUIManager : MonoBehaviour
 {
+    [Header("Artifact")]
+    [SerializeField] private Vector3 artifactDisplayStartPosition;
+    [SerializeField] private Vector3 artifactDisplayEndPosition;
     [SerializeField] private Image artifactDisplay;
+    
+    [Header("Buttons")]
     [SerializeField] private GameObject choiceButtons;
+    [SerializeField] private Transform realButton;
+    [SerializeField] private Transform souvenirButton;
     [SerializeField] private TMP_Text realPriceText;
     [SerializeField] private TMP_Text souvenirPriceText;
 
@@ -19,6 +26,8 @@ public class ArtifactUIManager : MonoBehaviour
     private ArtifactSlot selectedSlot;
 
     [SerializeField] private List<ArtifactSlot> allSlots;
+    private int currentSlotIndex = 0;
+    private int totalSlots = 0;
     
     [Header("Book")]
     [SerializeField] private GameObject bookPanel;
@@ -45,6 +54,7 @@ public class ArtifactUIManager : MonoBehaviour
         remainingTime = totalTime;
         timerRunning = true;
         timeExpired = false;
+        
     }
     
     private void Update()
@@ -70,18 +80,37 @@ public class ArtifactUIManager : MonoBehaviour
     public void SetSlots(List<ArtifactSlot> slots)
     {
         allSlots = slots;
+        if (slots.Count > 0)
+        {
+            totalSlots = slots.Count;
+            currentSlotIndex = 0;
+            SelectArtifactFromSlot(slots[0]);
+        }
     }
 
     public void SelectArtifactFromSlot(ArtifactSlot slot)
     {
         if (timeExpired) return;
         
-        selectedSlot = slot;
-        selectedArtifact = slot.artifact;
-        artifactDisplay.sprite = selectedArtifact.GetArtifactSprite();
-        choiceButtons.SetActive(true);
-        realPriceText.text = selectedArtifact.GetRealPrice().ToString() + " $";
-        souvenirPriceText.text = selectedArtifact.GetSouvenirPrice().ToString() + " $";
+        currentSlotIndex = slot.slotIndex;
+        
+        // choiceButtons.SetActive(false);
+        choiceButtons.transform.DOScale(Vector3.zero, 0.4f).SetEase(Ease.OutFlash);
+        //play sound
+        artifactDisplay.transform.DOLocalMove(artifactDisplayStartPosition, 1f).SetEase(Ease.InFlash).onComplete = () =>
+        {
+            selectedSlot = slot;
+            selectedArtifact = slot.artifact;
+            artifactDisplay.sprite = selectedArtifact.GetArtifactSprite();
+            //play sound
+            artifactDisplay.transform.DOLocalMove(artifactDisplayEndPosition, 1f).SetEase(Ease.OutBack, 0.5f).onComplete = () =>
+            {
+                choiceButtons.SetActive(true);
+                realPriceText.text = selectedArtifact.GetRealPrice().ToString() + " $";
+                souvenirPriceText.text = selectedArtifact.GetSouvenirPrice().ToString() + " $";
+                choiceButtons.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutFlash);
+            };
+        };
     }
 
     public void ChooseReal() => MakeChoice(true);
@@ -94,10 +123,12 @@ public class ArtifactUIManager : MonoBehaviour
         selectedArtifact.DecidePrice(isReal);
         selectedSlot.SetResult(isReal);
 
-        choiceButtons.SetActive(false);
+        // choiceButtons.SetActive(false);
 
         if (AllArtifactsGuessed())
             continueButton.gameObject.SetActive(true);
+        
+        SelectArtifactFromSlot(allSlots[(currentSlotIndex+1)%totalSlots]);
     }
 
     private bool AllArtifactsGuessed()
