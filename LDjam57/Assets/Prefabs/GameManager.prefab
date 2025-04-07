@@ -63,7 +63,7 @@ MonoBehaviour:
   throwingManager: {fileID: 0}
   fishingManager: {fileID: 0}
   colorData: {fileID: 11400000, guid: 98cbe8dbe8d521f4d925fb485b09439e, type: 2}
-  testGameManager: 0
+  testGameManager: 1
 --- !u!1 &2538209588968666387
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7619882580984086141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -19.159973}
+  m_AnchoredPosition: {x: 0, y: -19.159912}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5028600064515913102

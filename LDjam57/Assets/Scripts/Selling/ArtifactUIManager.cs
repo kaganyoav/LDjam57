@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using FMOD.Studio;
+using FMODUnity;
 
 
 public class ArtifactUIManager : MonoBehaviour
@@ -54,7 +56,6 @@ public class ArtifactUIManager : MonoBehaviour
         remainingTime = totalTime;
         timerRunning = true;
         timeExpired = false;
-        
     }
     
     private void Update()
@@ -97,13 +98,21 @@ public class ArtifactUIManager : MonoBehaviour
         // choiceButtons.SetActive(false);
         choiceButtons.transform.DOScale(Vector3.zero, 0.4f).SetEase(Ease.OutFlash);
         //play sound
-        artifactDisplay.transform.DOLocalMove(artifactDisplayStartPosition, 1f).SetEase(Ease.InFlash).onComplete = () =>
+        if (selectedArtifact != null)
+        {
+            EventReference sound = selectedArtifact.GetSound();
+            AudioManager.Instance.PlayOneShot(sound, transform.position);
+        }
+        artifactDisplay.transform.DOLocalMove(artifactDisplayStartPosition, 1.2f).SetEase(Ease.InFlash).onComplete = () =>
         {
             selectedSlot = slot;
             selectedArtifact = slot.artifact;
             artifactDisplay.sprite = selectedArtifact.GetArtifactSprite();
             //play sound
-            artifactDisplay.transform.DOLocalMove(artifactDisplayEndPosition, 1f).SetEase(Ease.OutBack, 0.5f).onComplete = () =>
+            EventReference sound = selectedArtifact.GetSound();
+            AudioManager.Instance.PlayOneShot(sound, transform.position);
+            
+            artifactDisplay.transform.DOLocalMove(artifactDisplayEndPosition, 1.2f).SetEase(Ease.OutBack, 0.5f).onComplete = () =>
             {
                 choiceButtons.SetActive(true);
                 realPriceText.text = selectedArtifact.GetRealPrice().ToString() + " $";
@@ -119,6 +128,18 @@ public class ArtifactUIManager : MonoBehaviour
     private void MakeChoice(bool isReal)
     {
         if (timeExpired) return;
+
+        //play sound
+        if (isReal)
+        {
+            EventReference sound = FMODEvents.Instance.chooseReal;
+            AudioManager.Instance.PlayOneShot(sound, transform.position);
+        }
+        else
+        {
+            EventReference sound = FMODEvents.Instance.chooseSouvenir;
+            AudioManager.Instance.PlayOneShot(sound, transform.position);
+        }
 
         selectedArtifact.DecidePrice(isReal);
         selectedSlot.SetResult(isReal);

@@ -1,0 +1,229 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8810541293579577615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4341920360948604646}
+  - component: {fileID: 2739583913777739672}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4341920360948604646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8810541293579577615}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2739583913777739672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8810541293579577615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2a647c6c612e24d841f42da31b5bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <menuMusic>k__BackingField:
+    Guid:
+      Data1: -508158880
+      Data2: 1144638391
+      Data3: -554485078
+      Data4: -250180501
+    Path: event:/MainMenuMusic
+  <fishingMusic>k__BackingField:
+    Guid:
+      Data1: -143943399
+      Data2: 1247246148
+      Data3: 1843348878
+      Data4: 9841767
+    Path: event:/FishingMusic
+  <sellingMusic>k__BackingField:
+    Guid:
+      Data1: -1913518268
+      Data2: 1103678840
+      Data3: 1437038487
+      Data4: -2025176585
+    Path: event:/2nd stage Music
+  <resultsMusic>k__BackingField:
+    Guid:
+      Data1: -304902978
+      Data2: 1130120737
+      Data3: -744631919
+      Data4: -820402884
+    Path: event:/ResultsMusic
+  <ambience>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <toss>k__BackingField:
+    Guid:
+      Data1: 703713057
+      Data2: 1207432835
+      Data3: -4435033
+      Data4: -1267441426
+    Path: event:/Fishing/Toss
+  <tossWeak>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <tossMid>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <tossStrong>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <tossWindup>k__BackingField:
+    Guid:
+      Data1: -1213886321
+      Data2: 1192313878
+      Data3: -85515597
+      Data4: 2090336498
+    Path: event:/Fishing/Toss Windup
+  <waterImpact>k__BackingField:
+    Guid:
+      Data1: 1622141672
+      Data2: 1195309756
+      Data3: -1890650991
+      Data4: -1620776748
+    Path: event:/Fishing/MagnetSplash
+  <artifactEmerge>k__BackingField:
+    Guid:
+      Data1: -2020851782
+      Data2: 1223730846
+      Data3: 1298895516
+      Data4: 253237216
+    Path: event:/Fishing/RelicEmerge
+  <magnetImpact>k__BackingField:
+    Guid:
+      Data1: -2031919255
+      Data2: 1232130461
+      Data3: 2010741161
+      Data4: 1461256540
+    Path: event:/Fishing/MagnetCatch
+  <bookOpen>k__BackingField:
+    Guid:
+      Data1: -549796782
+      Data2: 1313000719
+      Data3: 1676966063
+      Data4: 1851985560
+    Path: event:/2nd stage/Book open
+  <bookClose>k__BackingField:
+    Guid:
+      Data1: -790632254
+      Data2: 1159768301
+      Data3: 1376309163
+      Data4: 1768389982
+    Path: event:/2nd stage/Book close
+  <bookFlipPrev>k__BackingField:
+    Guid:
+      Data1: -1137517263
+      Data2: 1270746106
+      Data3: -1504670311
+      Data4: -781949624
+    Path: event:/2nd stage/Book Backward
+  <bookFlipNext>k__BackingField:
+    Guid:
+      Data1: 1605242846
+      Data2: 1130585827
+      Data3: -1880693601
+      Data4: 1938728628
+    Path: event:/2nd stage/Book Forward
+  <coinMove>k__BackingField:
+    Guid:
+      Data1: -1289983937
+      Data2: 1331165176
+      Data3: -365326957
+      Data4: -1078755361
+    Path: event:/2nd stage/CoinMvmt
+  <ringMove>k__BackingField:
+    Guid:
+      Data1: 1963871531
+      Data2: 1206117196
+      Data3: 811628171
+      Data4: 18687065
+    Path: event:/2nd stage/RingMvmt
+  <pendantMove>k__BackingField:
+    Guid:
+      Data1: -267570659
+      Data2: 1166155177
+      Data3: 200912265
+      Data4: -2118904954
+    Path: event:/2nd stage/AmuletMvmt
+  <idolMove>k__BackingField:
+    Guid:
+      Data1: -1426135786
+      Data2: 1297909809
+      Data3: 616133303
+      Data4: -2077865208
+    Path: event:/2nd stage/IdolMvmt
+  <maskMove>k__BackingField:
+    Guid:
+      Data1: -13488902
+      Data2: 1111756605
+      Data3: 1850800531
+      Data4: -1924453294
+    Path: event:/2nd stage/MaskMvmt
+  <souvenirSouvenir>k__BackingField:
+    Guid:
+      Data1: -665534972
+      Data2: 1340542563
+      Data3: -759095927
+      Data4: -164134809
+    Path: event:/Results/Souvenir-Souvenir
+  <souvenirReal>k__BackingField:
+    Guid:
+      Data1: -1025033139
+      Data2: 1277723715
+      Data3: 1456751541
+      Data4: 1873198223
+    Path: event:/Results/Souvenir-Autentic
+  <realSouvenir>k__BackingField:
+    Guid:
+      Data1: 606521494
+      Data2: 1177897166
+      Data3: -225365325
+      Data4: -1527161449
+    Path: event:/Results/Authentic-Souvenir
+  <realReal>k__BackingField:
+    Guid:
+      Data1: -1478907460
+      Data2: 1267068808
+      Data3: 519987634
+      Data4: 599546645
+    Path: event:/Results/Authentic-Authentic
+  <cartelDialog>k__BackingField: []

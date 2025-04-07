@@ -37,3 +37,10 @@ MonoBehaviour:
   realPriceTagRotation: {x: 0, y: 0, z: 0}
   souvenirPriceTagPosition: {x: 0, y: 0, z: 0}
   souvenirPriceTagRotation: {x: 0, y: 0, z: 0}
+  artifactSound:
+    Guid:
+      Data1: -1426135786
+      Data2: 1297909809
+      Data3: 616133303
+      Data4: -2077865208
+    Path: event:/2nd stage/IdolMvmt

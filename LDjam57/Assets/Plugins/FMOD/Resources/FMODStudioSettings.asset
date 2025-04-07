@@ -536,8 +536,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../../Year 3/Unity/class2025-gameproject-team4/FMOD/test_project/test_project.fspro
-  sourceBankPath: ../../../Year 3/Unity/class2025-gameproject-team4/FMOD/test_project/Build
+  sourceProjectPath: ../FMOD/ver1/CURRENT/Magnetico.fspro
+  sourceBankPath: ../FMOD/ver1/CURRENT/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -561,6 +561,7 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
+  - Music
   - SFX
   BanksToLoad: []
   LiveUpdatePort: 9264

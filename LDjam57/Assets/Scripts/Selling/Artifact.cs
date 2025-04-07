@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 
@@ -51,5 +53,10 @@ public class Artifact
     public Sprite GetSilhouetteSprite()
     {
         return artifactData.artifactType.silhouetteSprite;
+    }
+
+    public EventReference GetSound()
+    {
+        return artifactData.artifactType.artifactSound;
     }
 }

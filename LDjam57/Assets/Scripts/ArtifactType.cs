@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ArtifactType", menuName = "Scriptable Objects/ArtifactType")]
@@ -21,6 +23,9 @@ public class ArtifactType : ScriptableObject
     [SerializeField] public Vector3 realPriceTagRotation;
     [SerializeField] public Vector3 souvenirPriceTagPosition;
     [SerializeField] public Vector3 souvenirPriceTagRotation;
+    
+    [Header("Sound")]
+    [SerializeField] public EventReference artifactSound;
     
     public ArtifactData GetRandomArtifact()
     {

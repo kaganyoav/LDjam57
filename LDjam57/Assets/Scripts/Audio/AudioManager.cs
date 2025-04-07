@@ -1,104 +1,99 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
+
+public enum MusicType
+{
+    None,
+    Menu,
+    Fishing,
+    Selling,
+    Results
+}
 
 public class AudioManager : MonoBehaviour
 {
-    private List<EventInstance> eventInstances;
-    
     public static AudioManager Instance;
-    
+
+    private List<EventInstance> eventInstances;
+
     private EventInstance menuMusic;
+    private EventInstance fishingMusic;
+    private EventInstance sellingMusic;
+    private EventInstance resultsMusic;
+    // private EventInstance ambientInstance;
+
+    private EventInstance currentMusicInstance;
+    private MusicType currentMusic = MusicType.None;
 
     [SerializeField] private bool noMusic;
     [SerializeField] private bool noAmbient;
-    
-    [SerializeField] private bool isMainMenu = false;
-    [SerializeField] private bool isWinScene = false;
-    [SerializeField] private bool isLoseScene = false;
 
     private void Awake()
     {
-        if (Instance != null) 
+        if (Instance != null)
         {
             Destroy(gameObject);
+            return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
         eventInstances = new List<EventInstance>();
-        // menuMusic = CreateEventInstance(FMODEvents.Instance.menuMusic);
+
+        menuMusic = CreateEventInstance(FMODEvents.Instance.menuMusic);
+        fishingMusic = CreateEventInstance(FMODEvents.Instance.fishingMusic);
+        sellingMusic = CreateEventInstance(FMODEvents.Instance.sellingMusic);
+        resultsMusic = CreateEventInstance(FMODEvents.Instance.resultsMusic);
+        // ambientInstance = CreateEventInstance(FMODEvents.Instance.ambience);
     }
 
-    private void Start()
+    private EventInstance CreateEventInstance(EventReference reference)
     {
-        if (noMusic) return;
+        EventInstance instance = RuntimeManager.CreateInstance(reference);
+        eventInstances.Add(instance);
+        return instance;
+    }
 
-        if (isMainMenu)
+    public void PlayMusic(MusicType type)
+    {
+        if (noMusic || type == currentMusic) return;
+
+        StopCurrentMusic();
+
+        switch (type)
         {
-            menuMusic.start();
+            case MusicType.Menu:
+                currentMusicInstance = menuMusic;
+                break;
+            case MusicType.Fishing:
+                currentMusicInstance = fishingMusic;
+                break;
+            case MusicType.Selling:
+                currentMusicInstance = sellingMusic;
+                break;
+            case MusicType.Results:
+                currentMusicInstance = resultsMusic;
+                break;
+            default:
+                return;
         }
-    }
-    public void StopMainMenuMusic()
-    {
-        if (noMusic) return;
-        
-        menuMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+        currentMusic = type;
+        currentMusicInstance.start();
     }
 
-    public void PlayOneShot(EventReference sound, Vector3 worldPos)
+    public void StopCurrentMusic()
     {
-        RuntimeManager.PlayOneShot(sound, worldPos);
-    }
-    
-    public EventInstance CreateEventInstance(EventReference eventReference)
-    {
-        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
-        eventInstances.Add(eventInstance);
-        return eventInstance;
+        if (noMusic || currentMusic == MusicType.None) return;
+
+        currentMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        currentMusic = MusicType.None;
     }
 
-    private void CleanUp()
-    {
-        foreach (EventInstance eventInstance in eventInstances)
-        {
-            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            eventInstance.release();
-        }
-    }
-    
-    private void OnDestroy()
-    {
-        CleanUp();
-    }
-    
-    // public void StartMusic()
-    // {
-    //     if (noMusic) return;
-    //     
-    //     musicInstance.start();
-    // }
-    //
-    // public void StopMusic()
-    // {
-    //     if (noMusic) return;
-    //     
-    //     musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-    // }
-
-    public void SetGhostCountParameter(float value)
-    {
-        FMODEvents.Instance.ghostCount = value;
-        RuntimeManager.StudioSystem.setParameterByName("GhostsFollowing", value);
-    }
-    
-    public void SetIntensityParameter(float value)
-    {
-        FMODEvents.Instance.intensity = value;
-        RuntimeManager.StudioSystem.setParameterByName("Intensity", value);
-    }
-    
     // public void StartAmbient()
     // {
     //     if (noAmbient) return;
@@ -108,9 +103,21 @@ public class AudioManager : MonoBehaviour
     // public void StopAmbient()
     // {
     //     if (noAmbient) return;
-    //     ambientInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    //     ambientInstance.stop(STOP_MODE.ALLOWFADEOUT);
     // }
-    
-    
 
+    public void PlayOneShot(EventReference sound, Vector3 worldPos)
+    {
+        Debug.Log("Playing sound: " + sound);
+        RuntimeManager.PlayOneShot(sound, worldPos);
+    }
+
+    private void OnDestroy()
+    {
+        foreach (EventInstance e in eventInstances)
+        {
+            e.stop(STOP_MODE.IMMEDIATE);
+            e.release();
+        }
+    }
 }

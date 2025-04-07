@@ -37,3 +37,10 @@ MonoBehaviour:
   realPriceTagRotation: {x: 0, y: 0, z: 0}
   souvenirPriceTagPosition: {x: 0, y: 0, z: 0}
   souvenirPriceTagRotation: {x: 0, y: 0, z: 0}
+  artifactSound:
+    Guid:
+      Data1: -267570659
+      Data2: 1166155177
+      Data3: 200912265
+      Data4: -2118904954
+    Path: event:/2nd stage/AmuletMvmt

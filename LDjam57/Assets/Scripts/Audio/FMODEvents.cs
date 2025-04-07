@@ -4,16 +4,14 @@ using FMODUnity;
 
 public class FMODEvents : MonoBehaviour
 {
-    [field: Header("Parameters")]
-    [field: SerializeField] public float ghostCount;
-
-    [field: SerializeField] public float intensity;
-    
     [field: Header("Music")]
     [field: SerializeField] public EventReference menuMusic { get; private set; }
     [field: SerializeField] public EventReference fishingMusic { get; private set; }
     [field: SerializeField] public EventReference sellingMusic { get; private set; }
     [field: SerializeField] public EventReference resultsMusic { get; private set; }
+    
+    [field: Header("Ambience")]
+    [field: SerializeField] public EventReference ambience { get; private set; }
     
     [field: Header("Throw SFX")]
     [field: SerializeField] public EventReference toss { get; private set; }
@@ -42,6 +40,8 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference pendantMove { get; private set; }
     [field: SerializeField] public EventReference idolMove { get; private set; }
     [field: SerializeField] public EventReference maskMove { get; private set; }
+    [field: SerializeField] public EventReference chooseReal { get; private set; }
+    [field: SerializeField] public EventReference chooseSouvenir { get; private set; }
     
     [field: Header("Results SFX")]
     [field: SerializeField] public EventReference souvenirSouvenir { get; private set; }
@@ -50,11 +50,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference realReal { get; private set; }
     
     [field: Header("Dialog SFX")]
-    [field: SerializeField] public Dialog[] driverDialog { get; private set; }
-    [field: SerializeField] public Dialog[] bossDialog { get; private set; }
-    [field: SerializeField] public EventReference skipDialog { get; private set; }
-
-    
+    [field: SerializeField] public Dialog[] cartelDialog { get; private set; }
     public static FMODEvents Instance { get; private set; }
 
     private void Awake()
