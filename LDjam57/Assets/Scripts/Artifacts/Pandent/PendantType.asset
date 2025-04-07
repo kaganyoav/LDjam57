@@ -32,4 +32,4 @@ MonoBehaviour:
   fishingBoxSize: 1
   iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   drawnSprite: {fileID: 21300000, guid: 27b597cdc6d556644b78ebee0fda8ad7, type: 3}
-  silhouetteSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  silhouetteSprite: {fileID: 21300000, guid: e575a33decff7ae4c80518d9500c9072, type: 3}

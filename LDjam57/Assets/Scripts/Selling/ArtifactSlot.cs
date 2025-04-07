@@ -5,26 +5,31 @@ using UnityEngine.UI;
 public class ArtifactSlot : MonoBehaviour
 {
     public Image artifactImage;
-    public Image resultIcon; // Small icon to show real/souvenir
+    public Image priceTag; // Small icon to show real/souvenir
+    public Image priceTagOutline; // Outline of the price tag
     public TMP_Text chosenPriceText;
     public Artifact artifact;
+    public int slotIndex;
     
     private System.Action onClick;
 
-    public void Initialize(Artifact artifact, System.Action clickCallback)
+    public void Initialize(Artifact artifact,int index, System.Action clickCallback)
     {
         this.artifact = artifact;
-        artifactImage.sprite = artifact.GetArtifactSprite();
-        resultIcon.gameObject.SetActive(false);
+        artifactImage.sprite = artifact.GetSilhouetteSprite();
+        priceTag.gameObject.SetActive(false);
         onClick = clickCallback;
+        slotIndex = index;
     }
 
     public void SetResult(bool isReal)
     {
-        resultIcon.gameObject.SetActive(true);
-        resultIcon.color = isReal ? Color.green : Color.red;
+        priceTag.gameObject.SetActive(true);
+        priceTagOutline.color = isReal ? Color.green : Color.red;
         chosenPriceText.text = isReal ? artifact.GetRealPrice().ToString() : artifact.GetSouvenirPrice().ToString();
+        chosenPriceText.color = isReal ? Color.green : Color.red;
         chosenPriceText.text+= " $";
+        
     }
     
     public void OnClick()

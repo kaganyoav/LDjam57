@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   artifacts:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 77978d366ca32c64e928330149fdaa4c, type: 2}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 609607ca13b59874e86c4641304bba89, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 961fbb79085c2ae43a7b01fd8d5842d5, type: 2}
+  - {fileID: 11400000, guid: e5ba3614565edcb4ab85d5064b869a44, type: 2}
+  - {fileID: 11400000, guid: 239614d522679694b822fce0e4692401, type: 2}
+  - {fileID: 11400000, guid: 79d401b7c5b62d942953911065878098, type: 2}
+  - {fileID: 11400000, guid: f9d969eb5c7a43a4d882f074f1ba4a21, type: 2}
+  playerGuesses: 0000000000

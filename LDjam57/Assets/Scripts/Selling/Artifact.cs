@@ -37,9 +37,19 @@ public class Artifact
         return artifactData.artifactSprite;
     }
     
+    public Sprite GetIconSprite()
+    {
+        return artifactData.artifactType.iconSprite;
+    }
+    
     public void DecidePrice(bool selectedReal)
     {
         guessedAsReal = selectedReal;
         playerHasGuessed = true;
+    }
+
+    public Sprite GetSilhouetteSprite()
+    {
+        return artifactData.artifactType.silhouetteSprite;
     }
 }

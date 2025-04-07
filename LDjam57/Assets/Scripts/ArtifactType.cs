@@ -12,9 +12,15 @@ public class ArtifactType : ScriptableObject
     public float fishingBoxSize = 1f;
 
     [Header("Sprites")]
-    [SerializeField] private Sprite iconSprite;
-    [SerializeField] private Sprite drawnSprite;
-    [SerializeField] private Sprite silhouetteSprite;
+    [SerializeField] public Sprite iconSprite;
+    [SerializeField] public Sprite drawnSprite;
+    [SerializeField] public Sprite silhouetteSprite;
+    
+    [Header("PriceTags")]
+    [SerializeField] public Vector3 realPriceTagPosition;
+    [SerializeField] public Vector3 realPriceTagRotation;
+    [SerializeField] public Vector3 souvenirPriceTagPosition;
+    [SerializeField] public Vector3 souvenirPriceTagRotation;
     
     public ArtifactData GetRandomArtifact()
     {

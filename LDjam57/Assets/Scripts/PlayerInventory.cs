@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerInventory : ScriptableObject
 { 
     public List<ArtifactData> artifacts = new List<ArtifactData> { null, null, null, null, null };
+    
+    public List<bool> playerGuesses = new List<bool> { false, false, false, false, false };
 
     
     public void SetArtifact(ArtifactData artifact,int index)
@@ -46,5 +48,15 @@ public class PlayerInventory : ScriptableObject
         {
             artifacts[i] = null;
         }
+    }
+    
+    public void SetPlayerGuess(bool guess, int index)
+    {
+        if (index < 0 || index >= playerGuesses.Count)
+        {
+            Debug.LogError($"Index {index} is out of range for player guesses list.");
+            return;
+        }
+        playerGuesses[index] = guess;
     }
 }

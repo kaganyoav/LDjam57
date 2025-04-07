@@ -58,7 +58,7 @@ public class ArtifactInventoryLoader : MonoBehaviour
             artifacts.Add(artifact);
 
             ArtifactSlot slot = Instantiate(slotPrefab, slotContainers[i]);
-            slot.Initialize(artifact, () => uiManager.SelectArtifactFromSlot(slot));
+            slot.Initialize(artifact,i,() => uiManager.SelectArtifactFromSlot(slot));
             slots.Add(slot);
             i++;
         }
