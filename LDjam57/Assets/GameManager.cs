@@ -18,9 +18,16 @@ public class GameManager : MonoBehaviour
     public int numOfThrows = 5;
     public int currentThrow = 0;
     
+    [Header("Currency")]
+    public int playerCurrency = 0;
+    public int goalCurrency = 1000;
+    
     [Header("Managers")]
     [SerializeField] private ThrowingManager throwingManager;
     [SerializeField] private FishingManager fishingManager;
+    
+    [Header("Color")]
+    [SerializeField] public ColorData colorData;
     
     public bool testGameManager = false;
     private void Awake()
@@ -39,11 +46,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         if (testGameManager) return;
-        FishingPhase();
+        TransitionToFishingPhase();
     }
+    
+    //FISHING PHASE
 
     private void FishingPhase()
     {
+
         currentThrow = 0;
         playerInventory.ClearArtifacts();
         throwingManager.EnableThrowing();
@@ -74,13 +84,63 @@ public class GameManager : MonoBehaviour
     
     private void TransitionToFishingPhase()
     {
-        // Handle transition to fishing phase
+        SceneManager.sceneLoaded += OnFishingSceneLoaded;
+        SceneManager.LoadScene(fishingSceneName);
+    }
+
+    private void OnFishingSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == fishingSceneName)
+        {
+            throwingManager = FindObjectOfType<ThrowingManager>();
+            fishingManager = FindObjectOfType<FishingManager>();
+
+            FishingPhase();
+
+            // Important: Unsubscribe to avoid multiple calls!
+            SceneManager.sceneLoaded -= OnFishingSceneLoaded;
+        }
     }
     
+    
+    //SELLING PHASE
     private void TransitionToSellingPhase()
     {
-        // VISUAL TRANSITION
+        SceneManager.sceneLoaded += OnSellingSceneLoaded;
         SceneManager.LoadScene(sellingSceneName);
         Debug.Log("Transitioning to Selling Phase");
+    }
+
+    private void OnSellingSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == sellingSceneName)
+        {
+            // If you have any selling-related managers, find them here.
+            SceneManager.sceneLoaded -= OnSellingSceneLoaded;
+        }
+    }
+    
+    public void EndSellingPhase()
+    {
+        // Handle end of selling phase
+        TransitionToPawnShopPhase();
+    }
+    
+    
+    //PAWNSHOP PHASE
+    private void TransitionToPawnShopPhase()
+    {
+        SceneManager.sceneLoaded += OnPawnShopSceneLoaded;
+        SceneManager.LoadScene(pawnShopSceneName);
+        Debug.Log("Transitioning to Pawn Shop Phase");
+    }
+
+    private void OnPawnShopSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        if (arg0.name == pawnShopSceneName)
+        {
+            // If you have any pawn shop-related managers, find them here.
+            SceneManager.sceneLoaded -= OnPawnShopSceneLoaded;
+        }
     }
 }

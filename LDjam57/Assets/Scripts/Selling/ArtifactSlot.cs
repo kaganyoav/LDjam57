@@ -28,6 +28,7 @@ public class ArtifactSlot : MonoBehaviour
         priceTagOutline.color = isReal ? Color.green : Color.red;
         chosenPriceText.text = isReal ? artifact.GetRealPrice().ToString() : artifact.GetSouvenirPrice().ToString();
         chosenPriceText.color = isReal ? Color.green : Color.red;
+        GameManager.Instance.playerInventory.GuessArtifact(slotIndex, isReal);
         chosenPriceText.text+= " $";
         
     }

@@ -79,7 +79,8 @@ public class ArtifactUIManager : MonoBehaviour
             Debug.Log($"{slot.artifact.GetArtifactName()}: {(correct ? "Correct" : "Wrong")}");
             // Optional: Show result next to item
         }
-
+        
+        GameManager.Instance.EndSellingPhase();
         // Continue to next screen or show final score
     }
     

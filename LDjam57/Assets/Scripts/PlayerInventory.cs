@@ -59,4 +59,23 @@ public class PlayerInventory : ScriptableObject
         }
         playerGuesses[index] = guess;
     }
+
+    public void GuessArtifact(int index, bool isReal)
+    {
+        if (index < 0 || index >= artifacts.Count)
+        {
+            Debug.LogError($"Index {index} is out of range for artifacts list.");
+            return;
+        }
+
+        playerGuesses[index] = isReal;
+    }
+    
+    public void ClearGuesses()
+    {
+        for (int i = 0; i < playerGuesses.Count; i++)
+        {
+            playerGuesses[i] = false;
+        }
+    }
 }
