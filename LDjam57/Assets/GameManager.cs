@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using FMODUnity;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
@@ -43,8 +44,8 @@ public class GameManager : MonoBehaviour
     [Header("Dialog")]
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private string[] dialogText;
-    
-    [Header("Menu")]
+
+    [Header("Menu")] [SerializeField] private GameObject Black;
     [SerializeField] private GameObject menuUI;
     [SerializeField] private Transform cameraTransform;
     
@@ -60,15 +61,32 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        StartCoroutine(LoadBanksAndPlayMusic());
+    }
+        
+    private IEnumerator LoadBanksAndPlayMusic()
+    {
+        if (testGameManager) yield break;
+        // Wait for FMOD banks to load
+        while (!RuntimeManager.HaveAllBanksLoaded)
+        {
+            yield return null; // Wait until all banks are loaded
+        }
+
+        // Ensure FMOD is fully initialized before playing sounds
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.Instance.PlayMusic(MusicType.Menu);
     }
     
     private void Start()
     {
+        if(testGameManager) return;
         menuUI.SetActive(true);
-        AudioManager.Instance.PlayMusic(MusicType.Menu);
+        StartCoroutine(LoadBanksAndPlayMusic());
     }
     
-    
+
+
     [ContextMenu("Start Game")]
     public void StartGame()
     {

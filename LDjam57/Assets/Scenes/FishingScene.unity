@@ -505,6 +505,10 @@ PrefabInstance:
       value: event:/2nd stage/ChoiceAuthentic
       objectReference: {fileID: 0}
     - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <namedPrice>k__BackingField.Path
+      value: event:/Results/NamedPrice
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
       propertyPath: <ambience>k__BackingField.Guid.Data1
       value: -2102055706
       objectReference: {fileID: 0}
@@ -525,6 +529,10 @@ PrefabInstance:
       value: event:/2nd stage/ChoiceSouvenir
       objectReference: {fileID: 0}
     - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <nextItemResults>k__BackingField.Path
+      value: event:/Results/NextItemResuls
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
       propertyPath: <chooseReal>k__BackingField.Guid.Data1
       value: -513512924
       objectReference: {fileID: 0}
@@ -539,6 +547,22 @@ PrefabInstance:
     - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
       propertyPath: <chooseReal>k__BackingField.Guid.Data4
       value: 937447319
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <namedPrice>k__BackingField.Guid.Data1
+      value: -2051258345
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <namedPrice>k__BackingField.Guid.Data2
+      value: 1323858579
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <namedPrice>k__BackingField.Guid.Data3
+      value: 1646652816
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <namedPrice>k__BackingField.Guid.Data4
+      value: -134169984
       objectReference: {fileID: 0}
     - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
       propertyPath: <cartelDialog>k__BackingField.Array.size
@@ -559,6 +583,22 @@ PrefabInstance:
     - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
       propertyPath: <chooseSouvenir>k__BackingField.Guid.Data4
       value: 603763791
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <nextItemResults>k__BackingField.Guid.Data1
+      value: 2000712511
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <nextItemResults>k__BackingField.Guid.Data2
+      value: 1187683205
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <nextItemResults>k__BackingField.Guid.Data3
+      value: 1265301938
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
+      propertyPath: <nextItemResults>k__BackingField.Guid.Data4
+      value: 1104177842
       objectReference: {fileID: 0}
     - target: {fileID: 2739583913777739672, guid: 018bc0836381de448a3b212e8b44cca4, type: 3}
       propertyPath: <cartelDialog>k__BackingField.Array.data[0].Path
@@ -2374,13 +2414,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1140961620664154193, guid: 81997f4ebb0c91f43adc266ca5ccdfc6, type: 3}
+      propertyPath: Black
+      value: 
+      objectReference: {fileID: 1824835589}
+    - target: {fileID: 1140961620664154193, guid: 81997f4ebb0c91f43adc266ca5ccdfc6, type: 3}
       propertyPath: menuUI
       value: 
       objectReference: {fileID: 1822537272}
-    - target: {fileID: 1140961620664154193, guid: 81997f4ebb0c91f43adc266ca5ccdfc6, type: 3}
-      propertyPath: maxDays
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1140961620664154193, guid: 81997f4ebb0c91f43adc266ca5ccdfc6, type: 3}
       propertyPath: numOfThrows
       value: 5
@@ -4753,6 +4793,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1824835589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1536478372815108285, guid: 81997f4ebb0c91f43adc266ca5ccdfc6, type: 3}
+  m_PrefabInstance: {fileID: 862601785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1848086870
 GameObject:
   m_ObjectHideFlags: 0

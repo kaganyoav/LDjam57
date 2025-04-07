@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
@@ -41,7 +42,19 @@ public class AudioManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        StartCoroutine(LoadBanksAndPlayMusic());
+    }
+        
+    private IEnumerator LoadBanksAndPlayMusic()
+    {
+        // Wait for FMOD banks to load
+        while (!RuntimeManager.HaveAllBanksLoaded)
+        {
+            yield return null; // Wait until all banks are loaded
+        }
 
+        // Ensure FMOD is fully initialized before playing sounds
+        yield return new WaitForSeconds(0.1f);
         eventInstances = new List<EventInstance>();
 
         menuMusic = CreateEventInstance(FMODEvents.Instance.menuMusic);
@@ -50,6 +63,7 @@ public class AudioManager : MonoBehaviour
         resultsMusic = CreateEventInstance(FMODEvents.Instance.resultsMusic);
         ambientInstance = CreateEventInstance(FMODEvents.Instance.ambience);
     }
+    
 
     private EventInstance CreateEventInstance(EventReference reference)
     {
@@ -58,10 +72,11 @@ public class AudioManager : MonoBehaviour
         return instance;
     }
 
+    
     public void PlayMusic(MusicType type)
     {
         if (noMusic || type == currentMusic) return;
-
+        
         StopCurrentMusic();
 
         switch (type)
@@ -79,7 +94,7 @@ public class AudioManager : MonoBehaviour
                 currentMusicInstance = resultsMusic;
                 break;
             default:
-                return;
+                return; 
         }
 
         currentMusic = type;

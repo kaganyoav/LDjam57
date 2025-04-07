@@ -47,7 +47,12 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference souvenirSouvenir { get; private set; }
     [field: SerializeField] public EventReference souvenirReal { get; private set; }
     [field: SerializeField] public EventReference realSouvenir { get; private set; }
-    [field: SerializeField] public EventReference realReal { get; private set; }
+    [field: SerializeField] public EventReference realReal { get; private set; }    
+    
+    [field: SerializeField] public EventReference namedPrice { get; private set; }
+    [field: SerializeField] public EventReference nextItemResults { get; private set; }
+    
+    
     
     [field: Header("Dialog SFX")]
     [field: SerializeField] public EventReference[] cartelDialog { get; private set; }

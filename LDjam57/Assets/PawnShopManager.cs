@@ -12,45 +12,37 @@ public class PawnShopManager : MonoBehaviour
 
     
     [Header("UI Panels")]
-    [SerializeField] private GameObject pawnShopUI;
     [SerializeField] private Image artifactDisplay;
 
     [Header("Colors")]
     [SerializeField] private Color realPriceColor;
     [SerializeField] private Color souvenirPriceColor;
 
-    [Header("Player Price UI")]
-    [SerializeField] private GameObject yourPricePanel;
-    [SerializeField] private Image yourPriceOutline;
     [SerializeField] private TMP_Text yourPriceText;
-
-    [Header("Real Price UI")]
-    [SerializeField] private GameObject realPricePanel;
-    [SerializeField] private Image realPriceOutline;
     [SerializeField] private TMP_Text realPriceText;
-
-    [Header("Reaction")]
-    [SerializeField] private SpriteRenderer reactionImage;
-    [SerializeField] private Sprite souvenirSouvenirSprite;
-    [SerializeField] private Sprite souvenirRealSprite;
-    [SerializeField] private Sprite realRealSprite;
-    [SerializeField] private Sprite realSouvenirSprite;
-
-    [Header("Player Money")]
-    [SerializeField] private TMP_Text moneyText;
 
     [Header("Next Button")]
     [SerializeField] private Button nextButton;
 
     private int totalMoney;
     private bool continuePressed = false;
+    
+    [Header("Clipboard")]
+    [SerializeField] private GameObject clipboard;
+    [SerializeField] private Vector3 clipboardStartPosition;
+    [SerializeField] private Vector3 clipboardEndPosition;
+    [SerializeField] private float clipboardMoveDuration = 1.5f;
+    [SerializeField] private GameObject extraPage;
+    [SerializeField] private Image extraPageImage;
+    [SerializeField] private Vector3 extraPageStartPosition;
+    [SerializeField] private Vector3 extraPageEndPosition;
+    [SerializeField] private float extraPageMoveDuration = 1f;
 
     private void Start()
     {
         realPriceColor = GameManager.Instance.colorData.realColor;
         souvenirPriceColor = GameManager.Instance.colorData.souvenirColor;
         totalMoney = 0;
-        pawnShopUI.SetActive(false);
 
         nextButton.gameObject.SetActive(false);
         nextButton.onClick.AddListener(OnNextPressed);
@@ -61,9 +53,7 @@ public class PawnShopManager : MonoBehaviour
     IEnumerator PawnShopCoroutine()
     {
         nextButton.gameObject.SetActive(true);
-        yield return new WaitUntil(() => continuePressed);
-        
-        pawnShopUI.SetActive(true);
+        // yield return new WaitUntil(() => continuePressed);
         
         int i = 0;
         foreach (ArtifactData data in GameManager.Instance.playerInventory.artifacts)
@@ -74,22 +64,26 @@ public class PawnShopManager : MonoBehaviour
                 continue;
             }
 
+
+
             bool playerGuess = GameManager.Instance.playerInventory.playerGuesses[i];
             i++;
 
             // Reset UI
             artifactDisplay.sprite = data.artifactSprite;
-            artifactDisplay.color = new Color(1, 1, 1, 0);
-            yourPricePanel.transform.localScale = Vector3.zero;
-            realPricePanel.transform.localScale = Vector3.zero;
-            reactionImage.transform.localScale = Vector3.zero;
+            extraPageImage.sprite = data.artifactType.drawnSprite;
+            artifactDisplay.color = new Color(1, 1, 1, 1);
             yourPriceText.text = "";
             realPriceText.text = "";
             nextButton.gameObject.SetActive(false);
             continuePressed = false;
+            
+            clipboard.transform.DOLocalMove(clipboardEndPosition, clipboardMoveDuration).SetEase(Ease.InOutQuad);
 
+            yield return new WaitForSeconds(clipboardMoveDuration);
+            
             // Fade in artifact
-            artifactDisplay.DOFade(1f, 0.5f);
+            // artifactDisplay.DOFade(1f, 0.5f);
             yield return new WaitForSeconds(0.5f);
 
             // Show player's price guess
@@ -98,10 +92,10 @@ public class PawnShopManager : MonoBehaviour
                 : data.artifactType.artifactSouvenirPrice;
 
             yourPriceText.text = guessedPrice + " $";
-            yourPriceOutline.color = playerGuess ? realPriceColor : souvenirPriceColor;
+            // AudioManager.Instance.PlayOneShot(FMODEvents.Instance.namedPrice, transform.position);
+            // yourPriceOutline.color = playerGuess ? realPriceColor : souvenirPriceColor;
             yourPriceText.color = playerGuess ? realPriceColor : souvenirPriceColor;
-            yourPricePanel.transform.DOScale(priceScale, 0.4f).SetEase(Ease.OutBack);
-
+                
             yield return new WaitForSeconds(1f);
 
             // Show real price
@@ -110,18 +104,26 @@ public class PawnShopManager : MonoBehaviour
                 : data.artifactType.artifactSouvenirPrice;
 
             realPriceText.text = realPrice + " $";
-            realPriceOutline.color = data.isReal ? realPriceColor : souvenirPriceColor;
+            // AudioManager.Instance.PlayOneShot(FMODEvents.Instance.namedPrice, transform.position);
+
+            // realPriceOutline.color = data.isReal ? realPriceColor : souvenirPriceColor;
             realPriceText.color = data.isReal ? realPriceColor : souvenirPriceColor;
-            realPricePanel.transform.DOScale(priceScale, 0.4f).SetEase(Ease.OutBack);
 
             yield return new WaitForSeconds(1f);
-
+            
             // Show reaction
             DetermineOutcome(data.isReal, playerGuess, data);
-
+            
+            extraPage.transform.DOLocalMove(extraPageEndPosition, extraPageMoveDuration).SetEase(Ease.InOutQuad);
+            yield return new WaitForSeconds(extraPageMoveDuration);
+            
             // Wait for player to press "Next"
             nextButton.gameObject.SetActive(true);
             yield return new WaitUntil(() => continuePressed);
+            extraPage.transform.DOLocalMove(extraPageStartPosition, extraPageMoveDuration).SetEase(Ease.InOutQuad);
+            yield return new WaitForSeconds(extraPageMoveDuration);
+            clipboard.transform.DOLocalMove(clipboardStartPosition, clipboardMoveDuration).SetEase(Ease.InOutQuad);
+            yield return new WaitForSeconds(clipboardMoveDuration);
         }
 
         nextButton.gameObject.SetActive(false);
@@ -134,59 +136,53 @@ public class PawnShopManager : MonoBehaviour
         // Real Real
         if (playerGuess && isReal)
         {
-            reactionImage.sprite = realRealSprite;
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.realReal, transform.position);
             GameManager.Instance.AddCurrency(data.artifactType.artifactRealPrice);
         }
         
         // Real Fake
         else if (playerGuess && !isReal)
         {
-            reactionImage.sprite = realSouvenirSprite;
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.realSouvenir, transform.position);
         }
         
         // Fake Real
         else if (!playerGuess && isReal)
         {
-            reactionImage.sprite = souvenirRealSprite;
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.souvenirReal, transform.position);
             GameManager.Instance.AddCurrency(data.artifactType.artifactSouvenirPrice);
         }
         
         // Fake Fake
         else 
         {
-            reactionImage.sprite = souvenirSouvenirSprite;
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.souvenirSouvenir, transform.position);
             GameManager.Instance.AddCurrency(data.artifactType.artifactSouvenirPrice);
         }
 
-        reactionImage.transform.DOScale(reactionScale, 0.4f).From(0f).SetEase(Ease.OutBack);
     }
 
     private void ShowReaction(bool isReal, bool playerGuess)
     {
         if (playerGuess && isReal)
         {
-            reactionImage.sprite = realRealSprite;
         }
         else if (playerGuess && !isReal)
         {
-            reactionImage.sprite = realSouvenirSprite;
         }
         else if (!playerGuess && isReal)
         {
-            reactionImage.sprite = souvenirRealSprite;
         }
         else // !playerGuess && !isReal
         {
-            reactionImage.sprite = souvenirSouvenirSprite;
         }
 
-        reactionImage.transform.DOScale(reactionScale, 0.4f).From(0f).SetEase(Ease.OutBack);
     }
     
 
     private void OnNextPressed()
     {
         continuePressed = true;
-        nextButton.gameObject.SetActive(false);
+        // nextButton.gameObject.SetActive(false);
     }
 }

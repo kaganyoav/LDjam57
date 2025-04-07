@@ -536,8 +536,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../FMOD/ver3/CURRENT/Magnetico.fspro
-  sourceBankPath: ../FMOD/ver3/CURRENT/Build
+  sourceProjectPath: ../FMOD/CURRENT-20250407T235310Z-001/CURRENT/Magnetico.fspro
+  sourceBankPath: ../FMOD/CURRENT-20250407T235310Z-001/CURRENT/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
