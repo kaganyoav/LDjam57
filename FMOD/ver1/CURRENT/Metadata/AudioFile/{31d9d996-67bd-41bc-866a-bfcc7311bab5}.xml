@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{31d9d996-67bd-41bc-866a-bfcc7311bab5}">
+		<property name="assetPath">
+			<value>mask mvmt-002.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7eb7d4e7-23b2-45bc-bec0-2ac4cf66ba5b}</destination>
+		</relationship>
+	</object>
+</objects>

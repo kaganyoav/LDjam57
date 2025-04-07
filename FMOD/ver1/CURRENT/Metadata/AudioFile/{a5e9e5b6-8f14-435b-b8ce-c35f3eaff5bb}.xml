@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a5e9e5b6-8f14-435b-b8ce-c35f3eaff5bb}">
+		<property name="assetPath">
+			<value>results track stinger 2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>6.6000208333333337</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7eb7d4e7-23b2-45bc-bec0-2ac4cf66ba5b}</destination>
+		</relationship>
+	</object>
+</objects>

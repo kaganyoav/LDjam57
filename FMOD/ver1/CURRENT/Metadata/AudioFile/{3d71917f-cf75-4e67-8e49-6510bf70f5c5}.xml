@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{3d71917f-cf75-4e67-8e49-6510bf70f5c5}">
+		<property name="assetPath">
+			<value>book backward flip-002.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.69999999999999996</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7eb7d4e7-23b2-45bc-bec0-2ac4cf66ba5b}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{cf5d4b69-65a8-4fa1-a5fe-f932f34a74de}">
+		<property name="assetPath">
+			<value>rope pulling.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>5.2999999999999998</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7eb7d4e7-23b2-45bc-bec0-2ac4cf66ba5b}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{af5f2038-de2b-4e5d-a31b-96707da04ffc}">
+		<property name="assetPath">
+			<value>Prev Relic.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.59999999999999998</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7eb7d4e7-23b2-45bc-bec0-2ac4cf66ba5b}</destination>
+		</relationship>
+	</object>
+</objects>

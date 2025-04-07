@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ArtifactSlot : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class ArtifactSlot : MonoBehaviour
         slotIndex = index;
         realColor = GameManager.Instance.colorData.realColor;
         souvenirColor = GameManager.Instance.colorData.souvenirColor;
+        priceTag.transform.localScale = Vector3.zero;
     }
 
     public void SetResult(bool isReal)
@@ -42,6 +44,10 @@ public class ArtifactSlot : MonoBehaviour
         chosenPriceText.color = isReal ? realColor : souvenirColor;
         GameManager.Instance.playerInventory.GuessArtifact(slotIndex, isReal);
         chosenPriceText.text+= " $";
+        priceTag.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
+        float rnd = Random.value;
+        int rotation = rnd > 0.5 ? 15 : -15;
+        priceTag.transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
     
     public void OnClick()
