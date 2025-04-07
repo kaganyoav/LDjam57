@@ -22,10 +22,10 @@ MonoBehaviour:
   odds:
   - 0.3
   - 0.2
+  - 0.1
+  - 0.1
+  - 0.1
   - 0.2
-  - 0.1
-  - 0.1
-  - 0.1
   artifactName: Mask
   artifactRealPrice: 400
   artifactSouvenirPrice: 30

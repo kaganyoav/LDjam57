@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
     private EventInstance fishingMusic;
     private EventInstance sellingMusic;
     private EventInstance resultsMusic;
-    // private EventInstance ambientInstance;
+    private EventInstance ambientInstance;
 
     private EventInstance currentMusicInstance;
     private MusicType currentMusic = MusicType.None;
@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
         fishingMusic = CreateEventInstance(FMODEvents.Instance.fishingMusic);
         sellingMusic = CreateEventInstance(FMODEvents.Instance.sellingMusic);
         resultsMusic = CreateEventInstance(FMODEvents.Instance.resultsMusic);
-        // ambientInstance = CreateEventInstance(FMODEvents.Instance.ambience);
+        ambientInstance = CreateEventInstance(FMODEvents.Instance.ambience);
     }
 
     private EventInstance CreateEventInstance(EventReference reference)
@@ -94,17 +94,17 @@ public class AudioManager : MonoBehaviour
         currentMusic = MusicType.None;
     }
 
-    // public void StartAmbient()
-    // {
-    //     if (noAmbient) return;
-    //     ambientInstance.start();
-    // }
-    //
-    // public void StopAmbient()
-    // {
-    //     if (noAmbient) return;
-    //     ambientInstance.stop(STOP_MODE.ALLOWFADEOUT);
-    // }
+    public void StartAmbient()
+    {
+        if (noAmbient) return;
+        ambientInstance.start();
+    }
+    
+    public void StopAmbient()
+    {
+        if (noAmbient) return;
+        ambientInstance.stop(STOP_MODE.ALLOWFADEOUT);
+    }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
@@ -112,12 +112,12 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
-    private void OnDestroy()
-    {
-        foreach (EventInstance e in eventInstances)
-        {
-            e.stop(STOP_MODE.IMMEDIATE);
-            e.release();
-        }
-    }
+    // private void OnDestroy()
+    // {
+    //     foreach (EventInstance e in eventInstances)
+    //     {
+    //         e.stop(STOP_MODE.IMMEDIATE);
+    //         e.release();
+    //     }
+    // }
 }

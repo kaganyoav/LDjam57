@@ -174,12 +174,16 @@ public class ArtifactUIManager : MonoBehaviour
     {
         showBookButton.gameObject.SetActive(false);
         hideBookButton.gameObject.SetActive(true);
+        //play sound
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bookOpen, transform.position);
         bookPanel.transform.DOLocalMove(bookPanelEndPosition, bookPanelMoveDuration).SetEase(Ease.OutFlash);
     }
     public void HideBook()
     {
         hideBookButton.gameObject.SetActive(false);
         showBookButton.gameObject.SetActive(true);
+        //play sound
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bookClose, transform.position);
         bookPanel.transform.DOLocalMove(bookPanelStartPosition, bookPanelMoveDuration).SetEase(Ease.InFlash);
     }
     

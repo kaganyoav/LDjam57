@@ -20,7 +20,10 @@ public class BookManager : MonoBehaviour
     public void NextPage()
     {
         if (currentPage < bookImages.Count - 1)
+        {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bookFlipNext, transform.position); 
             currentPage++;
+        }
 
         UpdatePage();
     }
@@ -28,7 +31,10 @@ public class BookManager : MonoBehaviour
     public void PreviousPage()
     {
         if (currentPage > 0)
+        {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bookFlipPrev, transform.position);
             currentPage--;
+        }
 
         UpdatePage();
     }

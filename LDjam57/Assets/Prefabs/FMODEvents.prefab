@@ -50,28 +50,28 @@ MonoBehaviour:
       Data2: 1144638391
       Data3: -554485078
       Data4: -250180501
-    Path: event:/MainMenuMusic
+    Path: event:/General/MainMenuMusic
   <fishingMusic>k__BackingField:
     Guid:
       Data1: -143943399
       Data2: 1247246148
       Data3: 1843348878
       Data4: 9841767
-    Path: event:/FishingMusic
+    Path: event:/Fishing/FishingMusic
   <sellingMusic>k__BackingField:
     Guid:
       Data1: -1913518268
       Data2: 1103678840
       Data3: 1437038487
       Data4: -2025176585
-    Path: event:/2nd stage Music
+    Path: event:/2nd stage/2nd Stage Music
   <resultsMusic>k__BackingField:
     Guid:
       Data1: -304902978
       Data2: 1130120737
       Data3: -744631919
       Data4: -820402884
-    Path: event:/ResultsMusic
+    Path: event:/Results/ResultsMusic
   <ambience>k__BackingField:
     Guid:
       Data1: 0
@@ -198,6 +198,20 @@ MonoBehaviour:
       Data3: 1850800531
       Data4: -1924453294
     Path: event:/2nd stage/MaskMvmt
+  <chooseReal>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <chooseSouvenir>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <souvenirSouvenir>k__BackingField:
     Guid:
       Data1: -665534972

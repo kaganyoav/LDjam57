@@ -20,12 +20,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89cb685c33f3fc34ca39435c8e0fe313, type: 2}
   - {fileID: 11400000, guid: 79d401b7c5b62d942953911065878098, type: 2}
   odds:
+  - 0.2
+  - 0.2
+  - 0.1
+  - 0.1
+  - 0.1
   - 0.3
-  - 0.2
-  - 0.2
-  - 0.1
-  - 0.1
-  - 0.1
   artifactName: Pendant
   artifactRealPrice: 120
   artifactSouvenirPrice: 15

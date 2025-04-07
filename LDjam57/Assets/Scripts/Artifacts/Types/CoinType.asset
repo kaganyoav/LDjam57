@@ -20,12 +20,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94e0d14eadb21e742beea1785f49aa4d, type: 2}
   - {fileID: 11400000, guid: 961fbb79085c2ae43a7b01fd8d5842d5, type: 2}
   odds:
-  - 0.2
-  - 0.2
-  - 0.2
   - 0.1
   - 0.1
-  - 0.2
+  - 0.1
+  - 0.05
+  - 0.05
+  - 0.4
   artifactName: Coin
   artifactRealPrice: 40
   artifactSouvenirPrice: 5

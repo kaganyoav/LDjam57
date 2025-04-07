@@ -1,7 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using FMOD.Studio;
+using FMODUnity;
 
 public class ThrowingManager : MonoBehaviour
 {
@@ -39,7 +42,18 @@ public class ThrowingManager : MonoBehaviour
     [Header("Artifact Display")]
     [SerializeField] private ArtifactData currentArtifact;
     [SerializeField] private SpriteRenderer artifactSpriteRenderer;
-
+    
+    [Header("Animation")]
+    [SerializeField] private Animator fishermanAnimator;
+    
+    [Header("Sound")]
+    [SerializeField] private EventInstance throwSound;
+    
+    [Header("Onboarding")]
+    [SerializeField] private List<ArtifactData> onboardingArtifacts;
+    private int onboardingIndex = 0;
+    private bool onboardingActive = false;
+    
     // ————————————————————————
     // Private State
     // ————————————————————————
@@ -66,6 +80,7 @@ public class ThrowingManager : MonoBehaviour
 
     private void Start()
     {
+        throwSound = FMODUnity.RuntimeManager.CreateInstance(FMODEvents.Instance.tossWindup);
         // StartCoroutine(EnableInputAfterDelay(0.1f));
     }
     
@@ -74,10 +89,13 @@ public class ThrowingManager : MonoBehaviour
         if (day == 0)
         {
             //tutorial
+            onboardingActive = true;
             EnableThrowing();
         }
         else
         {
+            //normal day
+            onboardingActive = false;
             EnableThrowing();
         }
     }
@@ -125,6 +143,8 @@ public class ThrowingManager : MonoBehaviour
         isFilling = true;
         goingUp = true;
         currentFill = 0f;
+        throwSound.start();
+        fishermanAnimator.SetBool("loading", true);
     }
 
     private void UpdateFill()
@@ -143,7 +163,10 @@ public class ThrowingManager : MonoBehaviour
     {
         isFilling = false;
         float throwPower = currentFill;
+        fishermanAnimator.SetBool("loading", false);
+        fishermanAnimator.SetTrigger("throw");
         Debug.Log($"Throw Power: {throwPower}");
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.toss, magnetTransform.position);
         StartFishingMinigame(throwPower);
     }
 
@@ -178,7 +201,15 @@ public class ThrowingManager : MonoBehaviour
 
         StartCoroutine(WaitForLanding(() =>
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.magnetImpact, magnetTransform.position);
             ArtifactData artifact = artifactOdds.GetArtifactData(throwPower);
+            
+            //ONBOARDING
+            if(onboardingActive)
+            {
+                artifact = onboardingArtifacts[onboardingIndex];
+            }
+
             currentArtifact = artifact;
             fishingManager.StartMiniGame(artifact, magnetTransform.position.x);
         }));
@@ -194,7 +225,18 @@ public class ThrowingManager : MonoBehaviour
     public void MinigameOver(bool withArtifact = false)
     {
         artifactSpriteRenderer.sprite = withArtifact ? currentArtifact.artifactSprite : null;
+        if (withArtifact && onboardingActive)
+        {
+            onboardingIndex++;
+            if (onboardingIndex >= onboardingArtifacts.Count)
+            {
+                onboardingActive = false;
+                onboardingIndex = 0;
+            }
+        }
         if(!withArtifact) currentArtifact = null; 
+        
+        
         
         PullMagnetBack(() =>
         {
@@ -219,9 +261,12 @@ public class ThrowingManager : MonoBehaviour
         magnetRb.angularVelocity = 0f;
         magnetRb.bodyType = RigidbodyType2D.Kinematic;
 
+        fishermanAnimator.SetTrigger("pull");
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.artifactEmerge, magnetTransform.position);
+        
         magnetTransform
-            .DOMove(magnetStartPos, 1.5f)
-            .SetEase(Ease.InOutQuad)
+            .DOMove(magnetStartPos, 0.9f)
+            .SetEase(Ease.InFlash)
             .OnUpdate(UpdateRope)
             .OnComplete(() =>
             {

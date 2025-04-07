@@ -20,12 +20,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 488d2e00c070c7a488988efbd8aab7ee, type: 2}
   - {fileID: 11400000, guid: e5ba3614565edcb4ab85d5064b869a44, type: 2}
   odds:
-  - 0.3
-  - 0.3
   - 0.25
-  - 0.15
+  - 0.2
   - 0.1
   - 0.1
+  - 0.1
+  - 0.25
   artifactName: Idol
   artifactRealPrice: 200
   artifactSouvenirPrice: 20

@@ -15,9 +15,9 @@ public class FMODEvents : MonoBehaviour
     
     [field: Header("Throw SFX")]
     [field: SerializeField] public EventReference toss { get; private set; }
-    [field: SerializeField] public EventReference tossWeak { get; private set; }
-    [field: SerializeField] public EventReference tossMid { get; private set; }
-    [field: SerializeField] public EventReference tossStrong { get; private set; }
+    // [field: SerializeField] public EventReference tossWeak { get; private set; }
+    // [field: SerializeField] public EventReference tossMid { get; private set; }
+    // [field: SerializeField] public EventReference tossStrong { get; private set; }
     [field: SerializeField] public EventReference tossWindup { get; private set; }
     
     [field: Header("Water SFX")]
@@ -50,7 +50,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference realReal { get; private set; }
     
     [field: Header("Dialog SFX")]
-    [field: SerializeField] public Dialog[] cartelDialog { get; private set; }
+    [field: SerializeField] public EventReference[] cartelDialog { get; private set; }
     public static FMODEvents Instance { get; private set; }
 
     private void Awake()

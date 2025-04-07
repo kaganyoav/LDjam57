@@ -35,12 +35,12 @@ public class FishingManager : MonoBehaviour
     
     [Header("Progress")]
     [SerializeField] private Slider progressBar;
-    private bool pause = false;
+    private bool pause = true;
 
     [SerializeField] private float failTimer = 10f;
     
     [SerializeField] private ThrowingManager throwingManager;
-
+    
     private void Awake()
     {
         barTransform.gameObject.SetActive(false);
@@ -149,14 +149,6 @@ public class FishingManager : MonoBehaviour
 
     private void Artifact()
     {
-        // artifactTimer -= Time.deltaTime;
-        // if(artifactTimer <= 0)
-        // {
-        //     artifactTimer = UnityEngine.Random.value * timerMultiplier;
-        //     artifactDestination = UnityEngine.Random.value;
-        // }
-        // artifactPosition = Mathf.SmoothDamp(artifactPosition, artifactDestination, ref artifactSpeed, smoothMotion);
-        // artifactTransform.position = Vector3.Lerp(bottomPivot.position, topPivot.position, artifactPosition);
          artifactTimer -= Time.deltaTime;
         if (artifactTimer <= 0)
         {

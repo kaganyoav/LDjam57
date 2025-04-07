@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="SandboxScene" id="{f5e68158-ac45-4744-8e32-c947e84613ca}">
+		<property name="name">
+			<value>duck test</value>
+		</property>
+		<relationship name="folder">
+			<destination>{679110c1-9339-428f-a16e-e58b05c72d76}</destination>
+		</relationship>
+		<relationship name="markerTracks">
+			<destination>{2615328a-22d8-4ae5-9afe-7bc804cbdfed}</destination>
+		</relationship>
+		<relationship name="timeline">
+			<destination>{819df9a9-7f9e-466a-a568-2e25d8aa0c29}</destination>
+		</relationship>
+	</object>
+	<object class="MarkerTrack" id="{2615328a-22d8-4ae5-9afe-7bc804cbdfed}" />
+	<object class="Timeline" id="{819df9a9-7f9e-466a-a568-2e25d8aa0c29}" />
+</objects>
