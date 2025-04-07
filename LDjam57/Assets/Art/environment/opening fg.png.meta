@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 4d4222bb9b9fb8b40b75bccf300bef9b
+guid: a3e5465714683ac49b9a7eca1f24b359
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6980850398691176932
-    second: noSprite_0
+      213: -4500506485540419529
+    second: opening fg_0
+  - first:
+      213: 8523772010524099893
+    second: opening fg_1
+  - first:
+      213: 8576594452787974079
+    second: opening fg_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +52,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 108
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: noSprite_0
+      name: opening fg_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 3840
-        height: 2160
+        x: 1481
+        y: 840
+        width: 16
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e1b1249376f0e060800000000000000
-      internalID: 6980850398691176932
+      spriteID: 7388504323dfa81c0800000000000000
+      internalID: -4500506485540419529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: opening fg_1
+      rect:
+        serializedVersion: 2
+        x: 1507
+        y: 0
+        width: 1119
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 535c4b19b758a4670800000000000000
+      internalID: 8523772010524099893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: opening fg_2
+      rect:
+        serializedVersion: 2
+        x: 2794
+        y: 0
+        width: 1046
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbf430dc63f260770800000000000000
+      internalID: 8576594452787974079
       vertices: []
       indices: 
       edges: []
@@ -125,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      noSprite_0: 6980850398691176932
+      opening fg_0: -4500506485540419529
+      opening fg_1: 8523772010524099893
+      opening fg_2: 8576594452787974079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
