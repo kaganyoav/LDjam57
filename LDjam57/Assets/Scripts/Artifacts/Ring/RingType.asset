@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc97a9c7f925a342bec49ffe680a684, type: 3}
+  m_Name: RingType
+  m_EditorClassIdentifier: 
+  artifacts:
+  - {fileID: 11400000, guid: ac29341397dddf348b77cdaf0f12cc94, type: 2}
+  - {fileID: 11400000, guid: 7069b0cf547628f429c837e049df0b8f, type: 2}
+  - {fileID: 11400000, guid: 58eb06b39dd3db846968ca3e99c1b87a, type: 2}
+  - {fileID: 11400000, guid: c3d8356296ffa5d44a17f40a090f685c, type: 2}
+  - {fileID: 11400000, guid: f9d969eb5c7a43a4d882f074f1ba4a21, type: 2}
+  odds:
+  - 0.3
+  - 0.25
+  - 0.2
+  - 0.15
+  - 0.1
+  artifactName: Ring
+  artifactRealPrice: 150
+  artifactSouvenirPrice: 15
+  fishingBoxSize: 1
+  iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  drawnSprite: {fileID: 21300000, guid: 9a860e7806966794a90973188679b71a, type: 3}
+  silhouetteSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

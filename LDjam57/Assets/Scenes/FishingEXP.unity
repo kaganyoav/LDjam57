@@ -759,6 +759,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &437060140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437060141}
+  - component: {fileID: 437060142}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &437060141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437060140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &437060142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437060140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849d4572d471a514eb84d427ba40a322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuSceneName: MenuScene
+  fishingSceneName: Fishing
+  sellingSceneName: Selling
+  pawnShopSceneName: PawnShop
+  playerInventory: {fileID: 11400000, guid: 4dd7d778b46f00045badc63bc4c0bb9e, type: 2}
+  numOfThrows: 2
+  currentThrow: 0
+  throwingManager: {fileID: 1350023413}
+  fishingManager: {fileID: 679225009}
 --- !u!1 &517869831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,7 +1724,6 @@ MonoBehaviour:
   ropeSlack: 1.5
   magnetTransform: {fileID: 20602794}
   magnetRb: {fileID: 20602796}
-  seaBottomY: -1.7
   currentArtifact: {fileID: 0}
   artifactSpriteRenderer: {fileID: 378054672}
 --- !u!1 &1400039304
@@ -3029,3 +3081,4 @@ SceneRoots:
   - {fileID: 366842992}
   - {fileID: 20602794}
   - {fileID: 1725804241}
+  - {fileID: 437060141}

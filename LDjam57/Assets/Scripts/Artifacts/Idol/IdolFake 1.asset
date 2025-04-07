@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artifactType: {fileID: 11400000, guid: 0eb06ecbe4c02a7449ba7fc0bafacf67, type: 2}
   isReal: 0
-  artifactSprite: {fileID: 0}
+  artifactSprite: {fileID: 21300000, guid: fe5b05f9737fe5b4fad371451d0569f0, type: 3}

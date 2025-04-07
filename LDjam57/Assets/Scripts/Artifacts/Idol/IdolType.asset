@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e08d0e396b098643a0b3690aa6551ac, type: 2}
   - {fileID: 11400000, guid: 609607ca13b59874e86c4641304bba89, type: 2}
   - {fileID: 11400000, guid: 53340e24bfa138c448baa7d2f86f7dd2, type: 2}
+  - {fileID: 11400000, guid: 488d2e00c070c7a488988efbd8aab7ee, type: 2}
   - {fileID: 11400000, guid: e5ba3614565edcb4ab85d5064b869a44, type: 2}
   odds:
   - 0.3
@@ -24,7 +25,11 @@ MonoBehaviour:
   - 0.25
   - 0.15
   - 0.1
+  - 0.1
   artifactName: Idol
-  artifactRealPrice: 0
-  artifactSouvenirPrice: 0
+  artifactRealPrice: 100
+  artifactSouvenirPrice: 10
   fishingBoxSize: 1
+  iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  drawnSprite: {fileID: 21300000, guid: 64e68c862c1ab8e48bea8bb95142b6ac, type: 3}
+  silhouetteSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

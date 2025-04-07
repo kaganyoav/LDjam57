@@ -4,8 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ArtifactOdds", menuName = "Scriptable Objects/ArtifactOdds")]
 public class ArtifactOdds : ScriptableObject
 {
-    // [SerializeField] private List<float> closestRangeOdds = new List<float> { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f };
-    // [SerializeField] private List<ArtifactType> closestRangeTypes;
 
     [SerializeField] private List<float> closeRangeOdds = new List<float> { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f };
     [SerializeField] private List<ArtifactType> closeRangeTypes;
@@ -16,8 +14,6 @@ public class ArtifactOdds : ScriptableObject
     [SerializeField] private List<float> farRangeOdds = new List<float> { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f };
     [SerializeField] private List<ArtifactType> farRangeTypes;
 
-    // [SerializeField] private List<float> farthestRangeOdds = new List<float> { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f };
-    // [SerializeField] private List<ArtifactType> farthestRangeTypes;
 
     [SerializeField] private ArtifactData defaultArtifact;
 
@@ -26,34 +22,18 @@ public class ArtifactOdds : ScriptableObject
         List<float> odds;
         List<ArtifactType> types;
 
-        if (throwPower < 0.2f)
-        {
-            // odds = closestRangeOdds;
-            // types = closestRangeTypes;
-            odds = closeRangeOdds;
-            types = closeRangeTypes;
-        }
-        else if (throwPower < 0.4f)
+        if (throwPower < 0.5f)
         {
             odds = closeRangeOdds;
             types = closeRangeTypes;
-        }
-        else if (throwPower < 0.6f)
-        {
-            odds = middleRangeOdds;
-            types = middleRangeTypes;
         }
         else if (throwPower < 0.8f)
         {
-            // odds = farRangeOdds;
-            // types = farRangeTypes;
             odds = middleRangeOdds;
             types = middleRangeTypes;
         }
         else
         {
-            // odds = farthestRangeOdds;
-            // types = farthestRangeTypes;
             odds = farRangeOdds;
             types = farRangeTypes;
         }

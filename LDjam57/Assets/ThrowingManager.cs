@@ -24,6 +24,8 @@ public class ThrowingManager : MonoBehaviour
     [Header("Throw Settings")]
     [SerializeField] private float minThrowX = 4f;
     [SerializeField] private float maxThrowX = -7.5f;
+    [SerializeField] private float minThrowPower = 2f;
+    [SerializeField] private float maxThrowPower = 6f;
 
     [Header("Rope")]
     [SerializeField] private LineRenderer ropeLine;
@@ -33,7 +35,6 @@ public class ThrowingManager : MonoBehaviour
     [Header("Magnet")]
     [SerializeField] private Transform magnetTransform;
     [SerializeField] private Rigidbody2D magnetRb;
-    [SerializeField] private float seaBottomY = -2.5f;
 
     [Header("Artifact Display")]
     [SerializeField] private ArtifactData currentArtifact;
@@ -65,7 +66,7 @@ public class ThrowingManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(EnableInputAfterDelay(0.1f));
+        // StartCoroutine(EnableInputAfterDelay(0.1f));
     }
 
     private void Update()
@@ -129,6 +130,7 @@ public class ThrowingManager : MonoBehaviour
     {
         isFilling = false;
         float throwPower = currentFill;
+        Debug.Log($"Throw Power: {throwPower}");
         StartFishingMinigame(throwPower);
     }
 
@@ -150,14 +152,14 @@ public class ThrowingManager : MonoBehaviour
         artifactSpriteRenderer.sprite = null;
         magnetTransform.gameObject.SetActive(true);
 
-        magnetRb.velocity = Vector2.zero;
+        magnetRb.linearVelocity = Vector2.zero;
         magnetRb.angularVelocity = 0;
         magnetTransform.position = magnetStartPos;
 
         ropeLine.enabled = true;
 
-        Vector2 throwDirection = new Vector2(Mathf.Lerp(0, maxThrowX, throwPower), 1f).normalized;
-        float forcePower = Mathf.Lerp(3f, 9f, throwPower);
+        Vector2 throwDirection = new Vector2(Mathf.Lerp(minThrowX, maxThrowX, throwPower), 1f).normalized;
+        float forcePower = Mathf.Lerp(minThrowPower, maxThrowPower, throwPower);
 
         magnetRb.AddForce(throwDirection * forcePower, ForceMode2D.Impulse);
 
@@ -179,16 +181,18 @@ public class ThrowingManager : MonoBehaviour
     public void MinigameOver(bool withArtifact = false)
     {
         artifactSpriteRenderer.sprite = withArtifact ? currentArtifact.artifactSprite : null;
-
+        if(!withArtifact) currentArtifact = null; 
+        
         PullMagnetBack(() =>
         {
-            EnableThrowing();
+            GameManager.Instance.EndThrow(currentArtifact);
         });
     }
 
     public void EnableThrowing()
     {
         isMinigameActive = false;
+        StartCoroutine(EnableInputAfterDelay(0.1f));
     }
 
 
@@ -198,9 +202,9 @@ public class ThrowingManager : MonoBehaviour
 
     public void PullMagnetBack(System.Action onComplete = null)
     {
-        magnetRb.velocity = Vector2.zero;
+        magnetRb.linearVelocity = Vector2.zero;
         magnetRb.angularVelocity = 0f;
-        magnetRb.isKinematic = true;
+        magnetRb.bodyType = RigidbodyType2D.Kinematic;
 
         magnetTransform
             .DOMove(magnetStartPos, 1.5f)
@@ -208,7 +212,7 @@ public class ThrowingManager : MonoBehaviour
             .OnUpdate(UpdateRope)
             .OnComplete(() =>
             {
-                magnetRb.isKinematic = false;
+                magnetRb.bodyType = RigidbodyType2D.Dynamic;
                 ropeLine.enabled = false;
                 magnetTransform.gameObject.SetActive(false);
                 onComplete?.Invoke();

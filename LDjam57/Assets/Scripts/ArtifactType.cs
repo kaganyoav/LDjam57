@@ -11,6 +11,10 @@ public class ArtifactType : ScriptableObject
     public int artifactSouvenirPrice;
     public float fishingBoxSize = 1f;
 
+    [Header("Sprites")]
+    [SerializeField] private Sprite iconSprite;
+    [SerializeField] private Sprite drawnSprite;
+    [SerializeField] private Sprite silhouetteSprite;
     
     public ArtifactData GetRandomArtifact()
     {

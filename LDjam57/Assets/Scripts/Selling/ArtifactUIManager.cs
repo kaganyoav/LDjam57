@@ -25,6 +25,9 @@ public class ArtifactUIManager : MonoBehaviour
     [SerializeField] private GameObject bookPanel;
     [SerializeField] private Vector3 bookPanelStartPosition;
     [SerializeField] private Vector3 bookPanelEndPosition;
+    [SerializeField] private Button showBookButton;
+    [SerializeField] private Button hideBookButton;
+    [SerializeField] private float bookPanelMoveDuration = 1f;
 
     private void Start()
     {
@@ -44,7 +47,7 @@ public class ArtifactUIManager : MonoBehaviour
         artifactDisplay.sprite = selectedArtifact.GetArtifactSprite();
         choiceButtons.SetActive(true);
         realPriceText.text = selectedArtifact.GetRealPrice().ToString() + " $";
-        souvenirPriceText.text = selectedArtifact.GetSouvenirPrice() + " $";
+        souvenirPriceText.text = selectedArtifact.GetSouvenirPrice().ToString() + " $";
     }
 
     public void ChooseReal() => MakeChoice(true);
@@ -57,7 +60,7 @@ public class ArtifactUIManager : MonoBehaviour
         selectedSlot.SetResult(isReal);
 
         choiceButtons.SetActive(false);
-        artifactDisplay.sprite = null;
+        // artifactDisplay.sprite = null;
 
         if (AllArtifactsGuessed())
             continueButton.gameObject.SetActive(true);
@@ -82,14 +85,14 @@ public class ArtifactUIManager : MonoBehaviour
     
     public void ShowBook()
     {
-        bookPanel.SetActive(true);
-        bookPanel.transform.DOLocalMove(bookPanelEndPosition, 1f);
+        showBookButton.gameObject.SetActive(false);
+        hideBookButton.gameObject.SetActive(true);
+        bookPanel.transform.DOLocalMove(bookPanelEndPosition, bookPanelMoveDuration).SetEase(Ease.OutFlash);
     }
     public void HideBook()
     {
-        bookPanel.transform.DOLocalMove(bookPanelStartPosition, 1f).OnComplete(() =>
-        {
-            bookPanel.SetActive(false);
-        });
+        hideBookButton.gameObject.SetActive(false);
+        showBookButton.gameObject.SetActive(true);
+        bookPanel.transform.DOLocalMove(bookPanelStartPosition, bookPanelMoveDuration).SetEase(Ease.InFlash);
     }
 }
