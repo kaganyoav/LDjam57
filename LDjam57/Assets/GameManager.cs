@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,9 +21,13 @@ public class GameManager : MonoBehaviour
     public int numOfThrows = 5;
     public int currentThrow = 0;
 
-    [Header("Currency")] 
+    [Header("Day")]
+    [SerializeField] private TMP_Text dayText;
     public int currentDay = 0;
     public int maxDays = 7;
+    
+    [Header("Currency")] 
+    [SerializeField] private TMP_Text currencyText;
     public int playerCurrency = 0;
     public int goalCurrency = 1000;
     
@@ -60,6 +65,7 @@ public class GameManager : MonoBehaviour
 
         currentThrow = 0;
         playerInventory.ClearArtifacts();
+        UpdateDayText();
         throwingManager.StartDay(currentDay);
     }
     
@@ -88,6 +94,7 @@ public class GameManager : MonoBehaviour
     
     private void TransitionToFishingPhase()
     {
+        dayText.gameObject.SetActive(true);
         SceneManager.sceneLoaded += OnFishingSceneLoaded;
         SceneManager.LoadScene(fishingSceneName);
     }
@@ -110,6 +117,7 @@ public class GameManager : MonoBehaviour
     //SELLING PHASE
     private void TransitionToSellingPhase()
     {
+        dayText.gameObject.SetActive(false);
         SceneManager.sceneLoaded += OnSellingSceneLoaded;
         SceneManager.LoadScene(sellingSceneName);
         Debug.Log("Transitioning to Selling Phase");
@@ -173,5 +181,19 @@ public class GameManager : MonoBehaviour
     private void LoseGame()
     {
         SceneManager.LoadScene(loseSceneName);
+    }
+    
+    
+    //Currency
+    public void AddCurrency(int amount)
+    {
+        playerCurrency += amount;
+        currencyText.text = "$" + playerCurrency.ToString();
+    }
+    
+    //Day
+    public void UpdateDayText()
+    {
+        dayText.text = "Day " + (currentDay+1);
     }
 }

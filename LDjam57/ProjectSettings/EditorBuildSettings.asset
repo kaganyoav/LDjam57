@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PawnShop.unity
     guid: 158f8f08d3fc9954d9e98dcaeed01f34
+  - enabled: 1
+    path: Assets/Scenes/LoseScene.unity
+    guid: 15475b9547ee3c248a6e7f5d124512f6
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: a3013e9f2056d754e9ef2b8c78c6c2fc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

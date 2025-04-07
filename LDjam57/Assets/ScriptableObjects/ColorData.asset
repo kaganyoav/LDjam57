@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d239698160225b42a21d413c9da245d, type: 3}
   m_Name: ColorData
   m_EditorClassIdentifier: 
-  realColor: {r: 0.11475258, g: 0.85660374, b: 0.30913216, a: 1}
-  souvenirColor: {r: 0.93207544, g: 0.2124733, b: 0.16707003, a: 1}
+  realColor: {r: 0.882353, g: 0.70980394, b: 0.24313727, a: 1}
+  souvenirColor: {r: 0.7176471, g: 0.32156864, b: 0.14509805, a: 1}

@@ -52,10 +52,10 @@ public class FishingManager : MonoBehaviour
         barTransform.gameObject.SetActive(true);
         barTransform.position = new Vector3(catchX - 0.5f, barTransform.position.y, barTransform.position.z);
         // artifactSpriteRenderer.sprite = artifactData.artifactSprite;
-        artifactPosition = 1;
-        artifactDestination = 1;
+        artifactPosition = 0.5f;
+        artifactDestination = 0.7f;
         artifactTimer = UnityEngine.Random.value * timerMultiplier;
-        magnetPosition = 0.5f;
+        magnetPosition = 0.1f;
         magnetProgress = 0;
         failTimer = 10f;
         float artifactSize = artifactData.artifactType.fishingBoxSize;
@@ -76,8 +76,10 @@ public class FishingManager : MonoBehaviour
     {
         float min = magnetPosition - magnetSize / 2;
         float max = magnetPosition + magnetSize / 2;
-        
-        if (artifactPosition >= min && artifactPosition <= max)
+
+        bool isInMagnetZone = artifactPosition >= min && artifactPosition <= max;
+
+        if (isInMagnetZone)
         {
             magnetProgress += magnetPower * Time.deltaTime;
         }
@@ -85,6 +87,7 @@ public class FishingManager : MonoBehaviour
         {
             magnetProgress -= magnetProgressDegradationPower * Time.deltaTime;
             failTimer -= Time.deltaTime;
+
             if (failTimer <= 0)
             {
                 Debug.Log("Fail timer expired");
@@ -99,8 +102,11 @@ public class FishingManager : MonoBehaviour
         }
 
         magnetProgress = Mathf.Clamp(magnetProgress, 0, 1);
-        
         progressBar.value = magnetProgress;
+
+        // 🌈 Smoothly transition color
+        Color targetColor = isInMagnetZone ? Color.green : Color.red;
+        artifactSpriteRenderer.color = Color.Lerp(artifactSpriteRenderer.color, targetColor, Time.deltaTime * 10f);
     }
     
     private void EndMiniGame(bool win)
@@ -136,7 +142,7 @@ public class FishingManager : MonoBehaviour
             magnetPullVelocity = 0;
         }
         
-        magnetPosition = Mathf.Clamp(magnetPosition, magnetSize/2, 1-magnetSize/2);
+        magnetPosition = Mathf.Clamp(magnetPosition, 0, 1);
         
         magnetTransform.position = Vector3.Lerp(bottomPivot.position, topPivot.position, magnetPosition);
     }
@@ -154,7 +160,7 @@ public class FishingManager : MonoBehaviour
          artifactTimer -= Time.deltaTime;
         if (artifactTimer <= 0)
         {
-            artifactTimer = UnityEngine.Random.Range(0.2f, 0.6f) * timerMultiplier; // faster change
+            artifactTimer = UnityEngine.Random.Range(0.2f, 0.6f); // faster change
             float variation = UnityEngine.Random.Range(0.3f, 1f);
             float direction = UnityEngine.Random.value > 0.5f ? 1f : -1f;
             artifactDestination = Mathf.Clamp01(artifactPosition + direction * variation);

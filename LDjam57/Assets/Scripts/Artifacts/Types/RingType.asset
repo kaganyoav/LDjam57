@@ -20,13 +20,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f9d969eb5c7a43a4d882f074f1ba4a21, type: 2}
   odds:
   - 0.3
-  - 0.25
   - 0.2
-  - 0.15
   - 0.1
+  - 0.1
+  - 0.3
   artifactName: Ring
-  artifactRealPrice: 150
-  artifactSouvenirPrice: 15
+  artifactRealPrice: 80
+  artifactSouvenirPrice: 10
   fishingBoxSize: 0.7
   iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   drawnSprite: {fileID: 21300000, guid: 9a860e7806966794a90973188679b71a, type: 3}

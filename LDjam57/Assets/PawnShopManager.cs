@@ -51,7 +51,6 @@ public class PawnShopManager : MonoBehaviour
         souvenirPriceColor = GameManager.Instance.colorData.souvenirColor;
         totalMoney = 0;
         pawnShopUI.SetActive(false);
-        UpdateMoneyText();
 
         nextButton.gameObject.SetActive(false);
         nextButton.onClick.AddListener(OnNextPressed);
@@ -118,24 +117,48 @@ public class PawnShopManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             // Show reaction
-            bool correct = data.isReal == playerGuess;
-            ShowReaction(data.isReal, playerGuess);
-            
-            // Add money
-            if (correct)
-            {
-                totalMoney += realPrice;
-                UpdateMoneyText();
-            }
+            DetermineOutcome(data.isReal, playerGuess, data);
 
             // Wait for player to press "Next"
             nextButton.gameObject.SetActive(true);
             yield return new WaitUntil(() => continuePressed);
         }
 
-        Debug.Log("Pawn Shop Complete. Total: " + totalMoney);
         nextButton.gameObject.SetActive(false);
         // Optionally: load a summary or transition to next scene here
+        GameManager.Instance.EndPawnShopPhase();
+    }
+
+    private void DetermineOutcome(bool isReal, bool playerGuess, ArtifactData data)
+    {
+        // Real Real
+        if (playerGuess && isReal)
+        {
+            reactionImage.sprite = realRealSprite;
+            GameManager.Instance.AddCurrency(data.artifactType.artifactRealPrice);
+        }
+        
+        // Real Fake
+        else if (playerGuess && !isReal)
+        {
+            reactionImage.sprite = realSouvenirSprite;
+        }
+        
+        // Fake Real
+        else if (!playerGuess && isReal)
+        {
+            reactionImage.sprite = souvenirRealSprite;
+            GameManager.Instance.AddCurrency(data.artifactType.artifactSouvenirPrice);
+        }
+        
+        // Fake Fake
+        else 
+        {
+            reactionImage.sprite = souvenirSouvenirSprite;
+            GameManager.Instance.AddCurrency(data.artifactType.artifactSouvenirPrice);
+        }
+
+        reactionImage.transform.DOScale(reactionScale, 0.4f).From(0f).SetEase(Ease.OutBack);
     }
 
     private void ShowReaction(bool isReal, bool playerGuess)
@@ -159,11 +182,7 @@ public class PawnShopManager : MonoBehaviour
 
         reactionImage.transform.DOScale(reactionScale, 0.4f).From(0f).SetEase(Ease.OutBack);
     }
-
-    private void UpdateMoneyText()
-    {
-        moneyText.text = "Money: " + totalMoney + " $";
-    }
+    
 
     private void OnNextPressed()
     {
