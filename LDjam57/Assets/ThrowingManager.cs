@@ -68,6 +68,19 @@ public class ThrowingManager : MonoBehaviour
     {
         // StartCoroutine(EnableInputAfterDelay(0.1f));
     }
+    
+    public void StartDay(int day)
+    {
+        if (day == 0)
+        {
+            //tutorial
+            EnableThrowing();
+        }
+        else
+        {
+            EnableThrowing();
+        }
+    }
 
     private void Update()
     {

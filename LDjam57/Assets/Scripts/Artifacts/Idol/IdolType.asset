@@ -29,7 +29,11 @@ MonoBehaviour:
   artifactName: Idol
   artifactRealPrice: 100
   artifactSouvenirPrice: 10
-  fishingBoxSize: 1
+  fishingBoxSize: 0.6
   iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   drawnSprite: {fileID: 21300000, guid: 64e68c862c1ab8e48bea8bb95142b6ac, type: 3}
   silhouetteSprite: {fileID: 21300000, guid: 071e4b2a73dbaf741a25d8a10047665b, type: 3}
+  realPriceTagPosition: {x: 0, y: 0, z: 0}
+  realPriceTagRotation: {x: 0, y: 0, z: 0}
+  souvenirPriceTagPosition: {x: 0, y: 0, z: 0}
+  souvenirPriceTagRotation: {x: 0, y: 0, z: 0}

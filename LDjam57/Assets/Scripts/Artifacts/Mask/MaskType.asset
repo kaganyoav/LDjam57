@@ -29,7 +29,11 @@ MonoBehaviour:
   artifactName: Mask
   artifactRealPrice: 250
   artifactSouvenirPrice: 20
-  fishingBoxSize: 1
+  fishingBoxSize: 0.5
   iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   drawnSprite: {fileID: 21300000, guid: e0adcc7f08a795b43b09baf15afe112a, type: 3}
   silhouetteSprite: {fileID: 21300000, guid: 4ed47d4d0f52139458b21a58091b6ece, type: 3}
+  realPriceTagPosition: {x: 0, y: 0, z: 0}
+  realPriceTagRotation: {x: 0, y: 0, z: 0}
+  souvenirPriceTagPosition: {x: 0, y: 0, z: 0}
+  souvenirPriceTagRotation: {x: 0, y: 0, z: 0}

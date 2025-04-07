@@ -403,8 +403,11 @@ MonoBehaviour:
   playerInventory: {fileID: 11400000, guid: 4dd7d778b46f00045badc63bc4c0bb9e, type: 2}
   numOfThrows: 5
   currentThrow: 0
+  playerCurrency: 0
+  goalCurrency: 1000
   throwingManager: {fileID: 0}
   fishingManager: {fileID: 0}
+  colorData: {fileID: 11400000, guid: 98cbe8dbe8d521f4d925fb485b09439e, type: 2}
   testGameManager: 0
 --- !u!4 &937763274
 Transform:

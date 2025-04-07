@@ -52,14 +52,14 @@ public class FishingManager : MonoBehaviour
         barTransform.gameObject.SetActive(true);
         barTransform.position = new Vector3(catchX - 0.5f, barTransform.position.y, barTransform.position.z);
         // artifactSpriteRenderer.sprite = artifactData.artifactSprite;
-        artifactPosition = 0;
-        artifactDestination = 0;
+        artifactPosition = 1;
+        artifactDestination = 1;
         artifactTimer = UnityEngine.Random.value * timerMultiplier;
         magnetPosition = 0.5f;
         magnetProgress = 0;
         failTimer = 10f;
         float artifactSize = artifactData.artifactType.fishingBoxSize;
-        ResizeArtifact();
+        ResizeArtifact(artifactSize);
         pause = false;
     }
 
@@ -87,12 +87,14 @@ public class FishingManager : MonoBehaviour
             failTimer -= Time.deltaTime;
             if (failTimer <= 0)
             {
+                Debug.Log("Fail timer expired");
                 EndMiniGame(false);
             }
         }
 
         if (magnetProgress > 1)
         {
+            Debug.Log("Success");
             EndMiniGame(true);
         }
 
@@ -141,12 +143,23 @@ public class FishingManager : MonoBehaviour
 
     private void Artifact()
     {
-        artifactTimer -= Time.deltaTime;
-        if(artifactTimer <= 0)
+        // artifactTimer -= Time.deltaTime;
+        // if(artifactTimer <= 0)
+        // {
+        //     artifactTimer = UnityEngine.Random.value * timerMultiplier;
+        //     artifactDestination = UnityEngine.Random.value;
+        // }
+        // artifactPosition = Mathf.SmoothDamp(artifactPosition, artifactDestination, ref artifactSpeed, smoothMotion);
+        // artifactTransform.position = Vector3.Lerp(bottomPivot.position, topPivot.position, artifactPosition);
+         artifactTimer -= Time.deltaTime;
+        if (artifactTimer <= 0)
         {
-            artifactTimer = UnityEngine.Random.value * timerMultiplier;
-            artifactDestination = UnityEngine.Random.value;
+            artifactTimer = UnityEngine.Random.Range(0.2f, 0.6f) * timerMultiplier; // faster change
+            float variation = UnityEngine.Random.Range(0.3f, 1f);
+            float direction = UnityEngine.Random.value > 0.5f ? 1f : -1f;
+            artifactDestination = Mathf.Clamp01(artifactPosition + direction * variation);
         }
+
         artifactPosition = Mathf.SmoothDamp(artifactPosition, artifactDestination, ref artifactSpeed, smoothMotion);
         artifactTransform.position = Vector3.Lerp(bottomPivot.position, topPivot.position, artifactPosition);
     }

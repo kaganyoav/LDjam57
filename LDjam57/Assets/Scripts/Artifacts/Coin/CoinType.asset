@@ -29,7 +29,7 @@ MonoBehaviour:
   artifactName: Coin
   artifactRealPrice: 5
   artifactSouvenirPrice: 35
-  fishingBoxSize: 1
+  fishingBoxSize: 0.7
   iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   drawnSprite: {fileID: 21300000, guid: 919f836f654bd1c4784c40b62fa1a276, type: 3}
   silhouetteSprite: {fileID: 21300000, guid: 9671ba5ee537ab742ac22f9aff8f2bdc, type: 3}

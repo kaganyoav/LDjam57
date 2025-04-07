@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public string fishingSceneName = "Fishing";
     public string sellingSceneName = "Selling";
     public string pawnShopSceneName = "PawnShop";
+    public string winSceneName = "WinScene";
+    public string loseSceneName = "LoseScene";
     
     public static GameManager Instance { get; private set; }
     
@@ -17,8 +19,10 @@ public class GameManager : MonoBehaviour
     [Header("Throws")]
     public int numOfThrows = 5;
     public int currentThrow = 0;
-    
-    [Header("Currency")]
+
+    [Header("Currency")] 
+    public int currentDay = 0;
+    public int maxDays = 7;
     public int playerCurrency = 0;
     public int goalCurrency = 1000;
     
@@ -56,7 +60,7 @@ public class GameManager : MonoBehaviour
 
         currentThrow = 0;
         playerInventory.ClearArtifacts();
-        throwingManager.EnableThrowing();
+        throwingManager.StartDay(currentDay);
     }
     
     public void EndThrow(ArtifactData artifactData)
@@ -142,5 +146,32 @@ public class GameManager : MonoBehaviour
             // If you have any pawn shop-related managers, find them here.
             SceneManager.sceneLoaded -= OnPawnShopSceneLoaded;
         }
+    }
+    
+    public void EndPawnShopPhase()
+    {
+        // Handle end of pawn shop phase
+        currentDay++;
+        if (playerCurrency >= goalCurrency)
+        {
+            WinGame();
+        }
+        else if (currentDay >= maxDays)
+        {
+            LoseGame();
+        }
+        else
+        {
+            TransitionToFishingPhase();
+        }
+    }
+
+    private void WinGame()
+    {
+        SceneManager.LoadScene(winSceneName);
+    }
+    private void LoseGame()
+    {
+        SceneManager.LoadScene(loseSceneName);
     }
 }
