@@ -20,6 +20,7 @@ public class PawnShopManager : MonoBehaviour
 
     [SerializeField] private TMP_Text yourPriceText;
     [SerializeField] private TMP_Text realPriceText;
+    [SerializeField] private TMP_Text receivedText;
 
     [Header("Next Button")]
     [SerializeField] private Button nextButton;
@@ -75,6 +76,7 @@ public class PawnShopManager : MonoBehaviour
             artifactDisplay.color = new Color(1, 1, 1, 1);
             yourPriceText.text = "";
             realPriceText.text = "";
+            receivedText.text = "";
             nextButton.gameObject.SetActive(false);
             continuePressed = false;
             
@@ -102,13 +104,20 @@ public class PawnShopManager : MonoBehaviour
             int realPrice = data.isReal
                 ? data.artifactType.artifactRealPrice
                 : data.artifactType.artifactSouvenirPrice;
-
+            
             realPriceText.text = realPrice + " $";
             // AudioManager.Instance.PlayOneShot(FMODEvents.Instance.namedPrice, transform.position);
 
             // realPriceOutline.color = data.isReal ? realPriceColor : souvenirPriceColor;
             realPriceText.color = data.isReal ? realPriceColor : souvenirPriceColor;
 
+            yield return new WaitForSeconds(1f);
+            
+            // Show received money
+            int recived = CalculateReceivedMoney(data.isReal, playerGuess, data);
+            receivedText.text = recived + " $";
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.namedPrice, transform.position);
+            receivedText.color = data.isReal ? realPriceColor : souvenirPriceColor;
             yield return new WaitForSeconds(1f);
             
             // Show reaction
@@ -129,6 +138,28 @@ public class PawnShopManager : MonoBehaviour
         nextButton.gameObject.SetActive(false);
         // Optionally: load a summary or transition to next scene here
         GameManager.Instance.EndPawnShopPhase();
+    }
+
+    private int CalculateReceivedMoney(bool dataIsReal, bool playerGuess, ArtifactData data)
+    {
+        int received = 0;
+        if (playerGuess && dataIsReal)
+        {
+            received = data.artifactType.artifactRealPrice;
+        }
+        else if (playerGuess && !dataIsReal)
+        {
+            received = 0;
+        }
+        else if (!playerGuess && dataIsReal)
+        {
+            received = data.artifactType.artifactSouvenirPrice;
+        }
+        else // !playerGuess && !dataIsReal
+        {
+            received = data.artifactType.artifactSouvenirPrice;
+        }
+        return received;
     }
 
     private void DetermineOutcome(bool isReal, bool playerGuess, ArtifactData data)

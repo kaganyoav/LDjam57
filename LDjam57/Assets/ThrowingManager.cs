@@ -54,6 +54,9 @@ public class ThrowingManager : MonoBehaviour
     private int onboardingIndex = 0;
     private bool onboardingActive = false;
     
+    //WEIRD FIX
+    [SerializeField] public Animator salamncaAnimator;
+    
     // ————————————————————————
     // Private State
     // ————————————————————————

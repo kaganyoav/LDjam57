@@ -28,7 +28,7 @@ MonoBehaviour:
   - 0.25
   artifactName: Idol
   artifactRealPrice: 200
-  artifactSouvenirPrice: 20
+  artifactSouvenirPrice: 30
   fishingBoxSize: 0.6
   iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   drawnSprite: {fileID: 21300000, guid: 64e68c862c1ab8e48bea8bb95142b6ac, type: 3}

@@ -26,7 +26,7 @@ MonoBehaviour:
   - 0.3
   artifactName: Ring
   artifactRealPrice: 80
-  artifactSouvenirPrice: 10
+  artifactSouvenirPrice: 20
   fishingBoxSize: 0.7
   iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   drawnSprite: {fileID: 21300000, guid: 9a860e7806966794a90973188679b71a, type: 3}

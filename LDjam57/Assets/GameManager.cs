@@ -44,12 +44,21 @@ public class GameManager : MonoBehaviour
     [Header("Dialog")]
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private string[] dialogText;
+    [SerializeField] private string winnerDialogText;
+    [SerializeField] private string loserDialogText;
 
     [Header("Menu")] [SerializeField] private GameObject Black;
     [SerializeField] private GameObject menuUI;
     [SerializeField] private Transform cameraTransform;
     
+    [Header("Salamanca")]
+    [SerializeField] private Animator salamncaAnimator;
+    
+    [Header("END")]
+    [SerializeField] private GameObject endUI;
+    
     public bool testGameManager = false;
+    public bool gameWon = false;
     private void Awake()
     {
         if (Instance == null)
@@ -86,7 +95,6 @@ public class GameManager : MonoBehaviour
     }
     
 
-
     [ContextMenu("Start Game")]
     public void StartGame()
     {
@@ -108,9 +116,17 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.Instance.StartAmbient();
         //ENEMY BUSH ANIMATION
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        salamncaAnimator.SetTrigger("show");
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bush, transform.position);
+        yield return new WaitForSeconds(1.48f);
+        salamncaAnimator.SetBool("talking", true);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.cartelDialog[currentDay], transform.position);
         dialogManager.ShowLine(dialogText[currentDay]);
         yield return new WaitUntil(() => !dialogManager.IsDisplaying());
+        salamncaAnimator.SetBool("talking", false);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bush, transform.position);
+        yield return new WaitForSeconds(1.48f);
         Vector3 cameraStartPos = new Vector3(0, 0, -10);
         Transform cam = Camera.main.transform;
         cam.DOMove(cameraStartPos, 5f).SetEase(Ease.OutQuad).OnComplete(() =>
@@ -156,6 +172,7 @@ public class GameManager : MonoBehaviour
         {
             throwingManager = FindObjectOfType<ThrowingManager>();
             fishingManager = FindObjectOfType<FishingManager>();
+            salamncaAnimator = throwingManager.salamncaAnimator;
 
             FishingPhase();
 
@@ -232,13 +249,80 @@ public class GameManager : MonoBehaviour
 
     private void WinGame()
     {
-        SceneManager.LoadScene(winSceneName);
+        TransitionToEnd(true);
     }
     private void LoseGame()
     {
-        SceneManager.LoadScene(loseSceneName);
+        TransitionToEnd(false);
     }
     
+    public void TransitionToEnd(bool win)
+    {
+        gameWon = win;
+        SceneManager.sceneLoaded += OnEndLoaded;
+        SceneManager.LoadScene(fishingSceneName);
+    }
+
+    private void OnEndLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == fishingSceneName)
+        {
+            throwingManager = FindObjectOfType<ThrowingManager>();
+            fishingManager = FindObjectOfType<FishingManager>();
+            salamncaAnimator = throwingManager.salamncaAnimator;
+            if (gameWon)
+            {
+                StartCoroutine(WinCoroutine());
+            }
+            else
+            {
+                StartCoroutine(LoseCoroutine());
+            }
+
+            // Important: Unsubscribe to avoid multiple calls!
+            SceneManager.sceneLoaded -= OnEndLoaded;
+        }
+    }
+    
+    private IEnumerator WinCoroutine()
+    {
+        AudioManager.Instance.StartAmbient();
+        //ENEMY BUSH ANIMATION
+        yield return new WaitForSeconds(1f);
+        salamncaAnimator.SetTrigger("show");
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bush, transform.position);
+        yield return new WaitForSeconds(1.48f);
+        salamncaAnimator.SetBool("talking", true);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.cartelDialog[currentDay], transform.position);
+        dialogManager.ShowLine(dialogText[currentDay]);
+        yield return new WaitUntil(() => !dialogManager.IsDisplaying());
+        salamncaAnimator.SetBool("talking", false);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bush, transform.position);
+        yield return new WaitForSeconds(1.48f);
+        AudioManager.Instance.StopAmbient();
+        AudioManager.Instance.PlayMusic(MusicType.Win);
+        endUI.SetActive(true);
+    }
+    
+    private IEnumerator LoseCoroutine()
+    {
+        AudioManager.Instance.StartAmbient();
+        //ENEMY BUSH ANIMATION
+        yield return new WaitForSeconds(1f);
+        salamncaAnimator.SetTrigger("show");
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bush, transform.position);
+        yield return new WaitForSeconds(1.48f);
+        salamncaAnimator.SetBool("talking", true);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.cartelDialog[currentDay], transform.position);
+        dialogManager.ShowLine(dialogText[currentDay]);
+        yield return new WaitUntil(() => !dialogManager.IsDisplaying());
+        salamncaAnimator.SetBool("talking", false);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bush, transform.position);
+        yield return new WaitForSeconds(1.48f);
+        AudioManager.Instance.StopAmbient();
+        AudioManager.Instance.PlayMusic(MusicType.Win);
+        endUI.SetActive(true);
+    }
     
     //Currency
     public void AddCurrency(int amount)
@@ -251,5 +335,14 @@ public class GameManager : MonoBehaviour
     public void UpdateDayText()
     {
         dayText.text = "Day " + (currentDay+1);
+    }
+
+    public void QuitGame()
+    {
+        // Save any game data if necessary
+        Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 }

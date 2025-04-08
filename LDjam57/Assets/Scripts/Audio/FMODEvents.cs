@@ -9,6 +9,8 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference fishingMusic { get; private set; }
     [field: SerializeField] public EventReference sellingMusic { get; private set; }
     [field: SerializeField] public EventReference resultsMusic { get; private set; }
+    [field: SerializeField] public EventReference winMusic { get; private set; }
+    [field: SerializeField] public EventReference loseMusic { get; private set; }
     
     [field: Header("Ambience")]
     [field: SerializeField] public EventReference ambience { get; private set; }
@@ -52,6 +54,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference namedPrice { get; private set; }
     [field: SerializeField] public EventReference nextItemResults { get; private set; }
     
+    [field: SerializeField] public EventReference bush { get; private set; }
     
     
     [field: Header("Dialog SFX")]

@@ -11,7 +11,9 @@ public enum MusicType
     Menu,
     Fishing,
     Selling,
-    Results
+    Results,
+    Win,
+    Lose
 }
 
 public class AudioManager : MonoBehaviour
@@ -24,6 +26,8 @@ public class AudioManager : MonoBehaviour
     private EventInstance fishingMusic;
     private EventInstance sellingMusic;
     private EventInstance resultsMusic;
+    private EventInstance winMusic;
+    private EventInstance loseMusic;
     private EventInstance ambientInstance;
 
     private EventInstance currentMusicInstance;
@@ -61,6 +65,8 @@ public class AudioManager : MonoBehaviour
         fishingMusic = CreateEventInstance(FMODEvents.Instance.fishingMusic);
         sellingMusic = CreateEventInstance(FMODEvents.Instance.sellingMusic);
         resultsMusic = CreateEventInstance(FMODEvents.Instance.resultsMusic);
+        winMusic = CreateEventInstance(FMODEvents.Instance.winMusic);
+        loseMusic = CreateEventInstance(FMODEvents.Instance.loseMusic);
         ambientInstance = CreateEventInstance(FMODEvents.Instance.ambience);
     }
     
@@ -92,6 +98,12 @@ public class AudioManager : MonoBehaviour
                 break;
             case MusicType.Results:
                 currentMusicInstance = resultsMusic;
+                break;
+            case MusicType.Win:
+                currentMusicInstance = winMusic;
+                break;
+            case MusicType.Lose:
+                currentMusicInstance = loseMusic;
                 break;
             default:
                 return; 
