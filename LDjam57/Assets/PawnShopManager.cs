@@ -86,7 +86,7 @@ public class PawnShopManager : MonoBehaviour
             
             // Fade in artifact
             // artifactDisplay.DOFade(1f, 0.5f);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
 
             // Show player's price guess
             int guessedPrice = playerGuess
@@ -98,7 +98,7 @@ public class PawnShopManager : MonoBehaviour
             // yourPriceOutline.color = playerGuess ? realPriceColor : souvenirPriceColor;
             yourPriceText.color = playerGuess ? realPriceColor : souvenirPriceColor;
                 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
 
             // Show real price
             int realPrice = data.isReal
@@ -111,14 +111,14 @@ public class PawnShopManager : MonoBehaviour
             // realPriceOutline.color = data.isReal ? realPriceColor : souvenirPriceColor;
             realPriceText.color = data.isReal ? realPriceColor : souvenirPriceColor;
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             
             // Show received money
             int recived = CalculateReceivedMoney(data.isReal, playerGuess, data);
             receivedText.text = recived + " $";
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.namedPrice, transform.position);
             receivedText.color = data.isReal ? realPriceColor : souvenirPriceColor;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             
             // Show reaction
             DetermineOutcome(data.isReal, playerGuess, data);

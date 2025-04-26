@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     public string fishingSceneName = "Fishing";
     public string sellingSceneName = "Selling";
     public string pawnShopSceneName = "PawnShop";
-    public string winSceneName = "WinScene";
-    public string loseSceneName = "LoseScene";
     
     public static GameManager Instance { get; private set; }
     
@@ -27,12 +25,12 @@ public class GameManager : MonoBehaviour
     [Header("Day")]
     [SerializeField] private TMP_Text dayText;
     public int currentDay = 0;
-    public int maxDays = 7;
+    public int maxDays = 5;
     
     [Header("Currency")] 
     [SerializeField] private TMP_Text currencyText;
     public int playerCurrency = 0;
-    public int goalCurrency = 1000;
+    public int goalCurrency = 500;
     
     [Header("Managers")]
     [SerializeField] private ThrowingManager throwingManager;
@@ -294,7 +292,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.48f);
         salamncaAnimator.SetBool("talking", true);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.cartelDialog[currentDay], transform.position);
-        dialogManager.ShowLine(dialogText[currentDay]);
+        dialogManager.ShowLine(winnerDialogText);
         yield return new WaitUntil(() => !dialogManager.IsDisplaying());
         salamncaAnimator.SetBool("talking", false);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bush, transform.position);
@@ -314,13 +312,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.48f);
         salamncaAnimator.SetBool("talking", true);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.cartelDialog[currentDay], transform.position);
-        dialogManager.ShowLine(dialogText[currentDay]);
+        dialogManager.ShowLine(loserDialogText);
         yield return new WaitUntil(() => !dialogManager.IsDisplaying());
         salamncaAnimator.SetBool("talking", false);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.bush, transform.position);
         yield return new WaitForSeconds(1.48f);
         AudioManager.Instance.StopAmbient();
-        AudioManager.Instance.PlayMusic(MusicType.Win);
+        AudioManager.Instance.PlayMusic(MusicType.Lose);
         endUI.SetActive(true);
     }
     

@@ -1250,12 +1250,12 @@ MonoBehaviour:
   clipboard: {fileID: 1028535226}
   clipboardStartPosition: {x: 0, y: 1200, z: 0}
   clipboardEndPosition: {x: 0, y: 0, z: 0}
-  clipboardMoveDuration: 1.5
+  clipboardMoveDuration: 1
   extraPage: {fileID: 1978610292}
   extraPageImage: {fileID: 462700325}
   extraPageStartPosition: {x: 72, y: -23, z: 0}
   extraPageEndPosition: {x: 515, y: -55, z: 0}
-  extraPageMoveDuration: 1.5
+  extraPageMoveDuration: 1
 --- !u!1 &839204023
 GameObject:
   m_ObjectHideFlags: 0

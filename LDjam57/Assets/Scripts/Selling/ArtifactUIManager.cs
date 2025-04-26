@@ -121,6 +121,24 @@ public class ArtifactUIManager : MonoBehaviour
             };
         };
     }
+    
+    public void HideArtifact()
+    {
+        if (timeExpired) return;
+
+        choiceButtons.transform.DOScale(Vector3.zero, 0.4f).SetEase(Ease.OutFlash);
+        //play sound
+        if (selectedArtifact != null)
+        {
+            EventReference sound = selectedArtifact.GetSound();
+            AudioManager.Instance.PlayOneShot(sound, transform.position);
+        }
+
+        artifactDisplay.transform.DOLocalMove(artifactDisplayStartPosition, 1.2f).SetEase(Ease.InFlash);
+        
+        selectedArtifact = null;
+        selectedSlot = null;
+    }
 
     public void ChooseReal() => MakeChoice(true);
     public void ChooseSouvenir() => MakeChoice(false);
@@ -147,9 +165,14 @@ public class ArtifactUIManager : MonoBehaviour
         // choiceButtons.SetActive(false);
 
         if (AllArtifactsGuessed())
+        {
             continueButton.gameObject.SetActive(true);
-        
-        SelectArtifactFromSlot(allSlots[(currentSlotIndex+1)%totalSlots]);
+            HideArtifact();
+        }
+        else
+        {
+            SelectArtifactFromSlot(allSlots[(currentSlotIndex+1)%totalSlots]);
+        }
     }
 
     private bool AllArtifactsGuessed()
